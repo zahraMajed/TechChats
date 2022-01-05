@@ -28,7 +28,7 @@ class FirebaseDatabaseClass {
     static func insertTechUser(with user: TechUser){
         databaseRef.child(user.safeEmail).setValue([
             "first_name": user.firstName,
-            "last_name": user.lastName,
+            "last_name": user.lastName
         ])
     }
     

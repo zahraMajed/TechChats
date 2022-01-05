@@ -44,12 +44,12 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRX-x5-ZC0">
                                 <rect key="frame" x="37" y="405" width="340" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wkJ-Lh-Ojl">
                                 <rect key="frame" x="37" y="490" width="340" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01l-Te-p4I">
                                 <rect key="frame" x="37" y="565" width="133" height="32"/>
@@ -206,7 +206,7 @@
         <!--Profile-->
         <scene sceneID="FeW-gH-YbR">
             <objects>
-                <viewController id="hQe-Yk-XLu" customClass="UserProfileViewController" customModule="TechChats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userProfileVC" modalPresentationStyle="fullScreen" id="hQe-Yk-XLu" customClass="UserProfileViewController" customModule="TechChats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TKV-Db-EPs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -218,6 +218,9 @@
                                 <state key="normal" title="SIGNUP">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signoutBtnPressed:" destination="hQe-Yk-XLu" eventType="touchUpInside" id="Jqb-Js-a3F"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="R9Z-A1-yOg"/>
@@ -233,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sRs-if-qbI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-342" y="1493"/>
+            <point key="canvasLocation" x="-139" y="1489"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="H5O-GX-iji">
@@ -265,7 +268,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-PK-QXC">
                                 <rect key="frame" x="37" y="575" width="340" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-dq-zg6">
                                 <rect key="frame" x="37" y="765" width="340" height="40"/>
@@ -274,11 +277,14 @@
                                 <state key="normal" title="SIGNUP">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signupBtnPressed:" destination="PTF-Qb-MUZ" eventType="touchUpInside" id="5hc-oV-Nk6"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GFE-DU-L1G">
                                 <rect key="frame" x="37" y="660" width="340" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eqP-Vb-NDj"/>
@@ -314,6 +320,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CdA-5z-w4u"/>
+                    <connections>
+                        <outlet property="emailTF" destination="2ai-PK-QXC" id="LN9-8s-cTA"/>
+                        <outlet property="firstNameTF" destination="Qgt-Hc-32f" id="fXV-dE-1fM"/>
+                        <outlet property="lastNameTF" destination="X1r-Za-AWk" id="eyQ-ob-wvD"/>
+                        <outlet property="passwordTF" destination="GFE-DU-L1G" id="T6V-Je-bCF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epD-ro-ozG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -322,7 +334,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ltp-hP-NdJ">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="lq5-1A-lpS" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainTabBar" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="lq5-1A-lpS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iCA-3l-Oys"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3ms-xb-JRg">
@@ -337,7 +349,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5Z-WP-iLg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-342.02898550724638" y="798.88392857142856"/>
+            <point key="canvasLocation" x="-139" y="799"/>
         </scene>
     </scenes>
     <resources>

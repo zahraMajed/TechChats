@@ -30,6 +30,7 @@
 		C3C214C1278482B90060FD05 /* FireBaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C214C0278482B90060FD05 /* FireBaseAuth.swift */; };
 		C3C214C3278482CA0060FD05 /* FireBaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C214C2278482CA0060FD05 /* FireBaseDatabase.swift */; };
 		C3D027C327859E8800748D8B /* TechUserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027C227859E8800748D8B /* TechUserStruct.swift */; };
+		C3D027C62785F5E700748D8B /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027C52785F5E700748D8B /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		C3C214C0278482B90060FD05 /* FireBaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAuth.swift; sourceTree = "<group>"; };
 		C3C214C2278482CA0060FD05 /* FireBaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDatabase.swift; sourceTree = "<group>"; };
 		C3D027C227859E8800748D8B /* TechUserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechUserStruct.swift; sourceTree = "<group>"; };
+		C3D027C52785F5E700748D8B /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		C3C214582784705C0060FD05 /* TechChats */ = {
 			isa = PBXGroup;
 			children = (
+				C3D027C42785F5D500748D8B /* extensions */,
 				C3C214AB278479680060FD05 /* GoogleService-Info.plist */,
 				C3C214672784705F0060FD05 /* Info.plist */,
 				C3C214BD278482730060FD05 /* Storag */,
@@ -201,6 +204,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C3D027C42785F5D500748D8B /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C3D027C52785F5E700748D8B /* extensions.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -288,6 +299,7 @@
 				C3C2149B2784763F0060FD05 /* UserEditProfileViewController.swift in Sources */,
 				C3C214A5278476F80060FD05 /* TechUserViewController.swift in Sources */,
 				C3C21494278475E80060FD05 /* SignInViewController.swift in Sources */,
+				C3D027C62785F5E700748D8B /* extensions.swift in Sources */,
 				C3C21499278476300060FD05 /* UserProfileViewController.swift in Sources */,
 				C3C2145A2784705C0060FD05 /* AppDelegate.swift in Sources */,
 				C3C21492278475D20060FD05 /* SplachViewController.swift in Sources */,

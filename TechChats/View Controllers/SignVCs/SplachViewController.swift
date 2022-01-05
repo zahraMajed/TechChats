@@ -20,7 +20,8 @@ class SplachViewController: UIViewController {
             let signinVC = storyboard?.instantiateViewController(identifier: "signinVC")
             self.present(signinVC!, animated: true, completion: nil)
         }else {
-            let recentChatsVC = storyboard?.instantiateViewController(identifier: "recentChatVC")
+            
+            let recentChatsVC = storyboard?.instantiateViewController(identifier: "mainTabBar")
             self.present(recentChatsVC!, animated: true, completion: nil)
         }
     }
