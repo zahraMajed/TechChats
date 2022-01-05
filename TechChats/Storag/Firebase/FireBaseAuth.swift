@@ -30,8 +30,8 @@ class FirebaseAuthClass {
             } else if !isExist {
                 FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { authDataResult, error in
                     guard  authDataResult != nil , error == nil else {
-                        print("Error creating user")
-                        //
+                        print("Faild to create a user")
+                        //show alert field to create a user may be some entry wrong ( if !isExist, !isSignedUp)
                         completion(false, false)
                         return
                     }
@@ -44,7 +44,14 @@ class FirebaseAuthClass {
         }
     }
     
-    static func signUserOut(){
+    static func signUserOut(completion: @escaping (_ isSignedOut: Bool) -> Void){
+        do {
+            try FirebaseAuth.Auth.auth().signOut()
+            completion(true)
+        }catch {
+            print("Faild to siginOut")
+            completion(false)
+        }
         
     }
 }
