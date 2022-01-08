@@ -14,6 +14,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         firstNameTF.delegate = self
@@ -43,7 +44,7 @@ class SignUpViewController: UIViewController {
                 return
             }
             
-            FirebaseAuthClass.signUserUp(firstName: firstName, lastName: lastName, email: email, password: password) { isExist, isSignedUp, errorInfo in
+            FirebaseAuthClass.signUserUp(firstName: firstName, lastName: lastName, email: email, password: password) { isExist, isSignedUp, errorInfo, techUSerObj in
                 if isExist {
                     //user exist
                     //show slert here that user is exist
@@ -56,9 +57,16 @@ class SignUpViewController: UIViewController {
                     }else if isSignedUp {
                         //show alert here
                         print("User has signed up successfully")
-                        let userProfileVC = self.storyboard?.instantiateViewController(identifier: "userProfileVC")
-                        self.present(userProfileVC!, animated: true, completion: nil)
-                    }
+                        //self.dismiss(animated: false, completion: nil)
+                        let editProfile = self.storyboard?.instantiateViewController(identifier: "userEditProfileVC") as! UserEditProfileViewController
+                        if let techUserObj = techUSerObj {
+                            editProfile.techUserObj = techUserObj
+                            print("still in signup")
+                            print(editProfile.techUserObj!)
+                        }
+                        self.present(editProfile, animated: true, completion: nil)
+                        
+                    }//end last else if
                 }
                 
             }

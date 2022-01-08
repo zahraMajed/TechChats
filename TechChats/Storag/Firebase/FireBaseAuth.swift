@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-class FirebaseAuthClass {
+final class FirebaseAuthClass {
     
     
     /// sign user in 
@@ -24,11 +24,11 @@ class FirebaseAuthClass {
     }
     
     /// sign user up if user does not have an acount
-    static func signUserUp(firstName:String, lastName:String ,email: String, password:String, completion: @escaping (_ isExist: Bool, _ isSignedUp:Bool, _ errorInfo:String?) -> Void){
+    static func signUserUp(firstName:String, lastName:String ,email: String, password:String, completion: @escaping (_ isExist: Bool, _ isSignedUp:Bool, _ errorInfo:String?, _ techUSerObj:TechUser?) -> Void) {
         FirebaseDatabaseClass.checkExistenceOfUser(with: email) { isExist in
             if isExist {
                 //to show an alert
-                completion(true,false,nil)
+                completion(true,false,nil,nil)
                 return
             } else if !isExist {
                 FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { authDataResult, error in
@@ -40,13 +40,13 @@ class FirebaseAuthClass {
                         let errorInfo = errorAInfo![1].value as! String
                         print(errorInfo)
                         //show alert field to create a user may be some entry wrong ( if !isExist, !isSignedUp)
-                        completion(false, false, errorInfo)
+                        completion(false, false, errorInfo,nil)
                         return
                     }
-                    
-                    FirebaseDatabaseClass.insertTechUser(with: TechUser(firstName: firstName, lastName: lastName, email: email))
+                    let techUserObj = TechUser(firstName: firstName, lastName: lastName, email: email)
+                    FirebaseDatabaseClass.insertTechUser(with: techUserObj)
                     //move to profile vc
-                    completion(false, true,nil)
+                    completion(false, true,nil, techUserObj)
                 }
             }
         }

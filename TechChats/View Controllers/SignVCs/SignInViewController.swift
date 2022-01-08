@@ -36,8 +36,9 @@ class SignInViewController: UIViewController {
             FirebaseAuthClass.signUserIn(email: userEmail, password: userPasaword) { isSigedin in
                 if isSigedin {
                     print("User has signed in successfully")
-                    let recentChatsVC = self.storyboard?.instantiateViewController(identifier: "mainTabBar")
-                    self.present(recentChatsVC!, animated: true, completion: nil)
+                    let mainTabBarToChat = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! UITabBarController
+                    mainTabBarToChat.selectedIndex = 0
+                    self.present(mainTabBarToChat, animated: true, completion: nil)
                 }else if !isSigedin {
                     if userEmail.isEmpty, userPasaword.isEmpty {
                         //show alert here

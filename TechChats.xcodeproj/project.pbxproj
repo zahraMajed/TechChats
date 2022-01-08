@@ -31,6 +31,9 @@
 		C3C214C3278482CA0060FD05 /* FireBaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C214C2278482CA0060FD05 /* FireBaseDatabase.swift */; };
 		C3D027C327859E8800748D8B /* TechUserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027C227859E8800748D8B /* TechUserStruct.swift */; };
 		C3D027C62785F5E700748D8B /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027C52785F5E700748D8B /* extensions.swift */; };
+		C3D027C92786FABC00748D8B /* RecentChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027C82786FABC00748D8B /* RecentChatTableViewCell.swift */; };
+		C3D027CC27880E3D00748D8B /* FirebaseStoarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027CB27880E3D00748D8B /* FirebaseStoarge.swift */; };
+		C3D027CE27881F9100748D8B /* mainTabBarC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027CD27881F9100748D8B /* mainTabBarC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,9 @@
 		C3C214C2278482CA0060FD05 /* FireBaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDatabase.swift; sourceTree = "<group>"; };
 		C3D027C227859E8800748D8B /* TechUserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechUserStruct.swift; sourceTree = "<group>"; };
 		C3D027C52785F5E700748D8B /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		C3D027C82786FABC00748D8B /* RecentChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChatTableViewCell.swift; sourceTree = "<group>"; };
+		C3D027CB27880E3D00748D8B /* FirebaseStoarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStoarge.swift; sourceTree = "<group>"; };
+		C3D027CD27881F9100748D8B /* mainTabBarC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainTabBarC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,9 +98,9 @@
 		C3C214582784705C0060FD05 /* TechChats */ = {
 			isa = PBXGroup;
 			children = (
-				C3D027C42785F5D500748D8B /* extensions */,
 				C3C214AB278479680060FD05 /* GoogleService-Info.plist */,
 				C3C214672784705F0060FD05 /* Info.plist */,
+				C3D027C42785F5D500748D8B /* extensions */,
 				C3C214BD278482730060FD05 /* Storag */,
 				C3C2148F2784756C0060FD05 /* Views */,
 				C3C2148E2784754D0060FD05 /* Resourses */,
@@ -110,6 +116,7 @@
 				C3C2149E2784769E0060FD05 /* ChatVCs */,
 				C3C2149C2784764B0060FD05 /* SignVCs */,
 				C3C214972784761B0060FD05 /* User Profile */,
+				C3D027CD27881F9100748D8B /* mainTabBarC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -126,6 +133,7 @@
 		C3C2148F2784756C0060FD05 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C3D027C72786FA9900748D8B /* TabelCell */,
 				C3C2145F2784705C0060FD05 /* Main.storyboard */,
 				C3C214622784705F0060FD05 /* Assets.xcassets */,
 				C3C214642784705F0060FD05 /* LaunchScreen.storyboard */,
@@ -192,6 +200,7 @@
 				C3D027C127859E6B00748D8B /* Model */,
 				C3C214C0278482B90060FD05 /* FireBaseAuth.swift */,
 				C3C214C2278482CA0060FD05 /* FireBaseDatabase.swift */,
+				C3D027CB27880E3D00748D8B /* FirebaseStoarge.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -210,6 +219,14 @@
 				C3D027C52785F5E700748D8B /* extensions.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		C3D027C72786FA9900748D8B /* TabelCell */ = {
+			isa = PBXGroup;
+			children = (
+				C3D027C82786FABC00748D8B /* RecentChatTableViewCell.swift */,
+			);
+			path = TabelCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,8 +323,11 @@
 				C3C214A0278476C30060FD05 /* RecentChatsViewController.swift in Sources */,
 				C3C2145C2784705C0060FD05 /* SceneDelegate.swift in Sources */,
 				C3C214C3278482CA0060FD05 /* FireBaseDatabase.swift in Sources */,
+				C3D027CE27881F9100748D8B /* mainTabBarC.swift in Sources */,
+				C3D027C92786FABC00748D8B /* RecentChatTableViewCell.swift in Sources */,
 				C3C214A2278476D20060FD05 /* ChatViewController.swift in Sources */,
 				C3C214A7278477070060FD05 /* TechProfileViewController.swift in Sources */,
+				C3D027CC27880E3D00748D8B /* FirebaseStoarge.swift in Sources */,
 				C3C21496278475F70060FD05 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

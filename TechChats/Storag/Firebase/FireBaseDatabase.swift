@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseDatabase
 
-class FirebaseDatabaseClass {
+final class FirebaseDatabaseClass {
     
     static let databaseRef = Database.database().reference()
     
@@ -25,13 +25,59 @@ class FirebaseDatabaseClass {
         }
     }
     
+   
+     // let username = value?["username"] as? String ?? ""
+ 
+    
+    static func getTechUserData(with safeEmail:String, completion: @escaping (_ isFetched: Bool, _ userValeDic:NSDictionary?) -> Void){
+        databaseRef.child(safeEmail).observeSingleEvent(of: .value) { dataSnapshot in
+            guard let value = dataSnapshot.value as? NSDictionary else {
+                print("Fail to fetch data")
+                completion(false,nil)
+                return
+            }
+            
+            completion(true, value)
+            
+        }
+    }
+    
     static func insertTechUser(with user: TechUser){
         databaseRef.child(user.safeEmail).setValue([
             "first_name": user.firstName,
             "last_name": user.lastName
-        ])
+        ]) {
+            (error:Error?, ref:DatabaseReference) in
+            if let error = error {
+              print("Data could not be save: \(error).")
+            } else {
+              print("Data save  successfully!")
+            }
+        }
     }
     
     //update
-  
+    
+    static func updateTechUser(with user:TechUser , completion: @escaping (Bool) -> Void){
+        
+        databaseRef.child(user.safeEmail).updateChildValues([
+            "first_name": user.firstName,
+            "last_name": user.lastName,
+            "job_title": user.jobTitle!,
+            "user_bio": user.bio!,
+            "linkedin_link": user.linkedinLink ?? "" ,
+            "github_link": user.gitHubLinked ?? ""
+        ]) {
+            (error:Error?, ref:DatabaseReference) in
+            if let error = error {
+              print("Data could not be update: \(error).")
+                completion(false)
+                
+            } else {
+              print("Data updated  successfully!")
+                completion(true)
+            }
+        }
+    }
+    
 }
