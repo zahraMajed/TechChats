@@ -25,6 +25,7 @@ class UserEditProfileViewController: UIViewController {
         userBioTV.delegate = self
         linkedinURLTF.delegate = self
         githubURLTF.delegate = self
+        userBioTV.layer.borderWidth = 0.5
         
         print("inside edit profile")
         putUserData()

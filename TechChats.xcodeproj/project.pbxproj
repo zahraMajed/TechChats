@@ -34,6 +34,7 @@
 		C3D027C92786FABC00748D8B /* RecentChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027C82786FABC00748D8B /* RecentChatTableViewCell.swift */; };
 		C3D027CC27880E3D00748D8B /* FirebaseStoarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027CB27880E3D00748D8B /* FirebaseStoarge.swift */; };
 		C3D027CE27881F9100748D8B /* mainTabBarC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027CD27881F9100748D8B /* mainTabBarC.swift */; };
+		C3D027D2278A117D00748D8B /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027D1278A117D00748D8B /* FriendsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		C3D027C82786FABC00748D8B /* RecentChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChatTableViewCell.swift; sourceTree = "<group>"; };
 		C3D027CB27880E3D00748D8B /* FirebaseStoarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStoarge.swift; sourceTree = "<group>"; };
 		C3D027CD27881F9100748D8B /* mainTabBarC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainTabBarC.swift; sourceTree = "<group>"; };
+		C3D027D1278A117D00748D8B /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D027C82786FABC00748D8B /* RecentChatTableViewCell.swift */,
+				C3D027D1278A117D00748D8B /* FriendsTableViewCell.swift */,
 			);
 			path = TabelCell;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				C3D027C62785F5E700748D8B /* extensions.swift in Sources */,
 				C3C21499278476300060FD05 /* UserProfileViewController.swift in Sources */,
 				C3C2145A2784705C0060FD05 /* AppDelegate.swift in Sources */,
+				C3D027D2278A117D00748D8B /* FriendsTableViewCell.swift in Sources */,
 				C3C21492278475D20060FD05 /* SplachViewController.swift in Sources */,
 				C3C214A0278476C30060FD05 /* RecentChatsViewController.swift in Sources */,
 				C3C2145C2784705C0060FD05 /* SceneDelegate.swift in Sources */,

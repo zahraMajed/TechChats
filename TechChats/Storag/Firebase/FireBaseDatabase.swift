@@ -24,9 +24,6 @@ final class FirebaseDatabaseClass {
             completion(true)
         }
     }
-    
-   
-     // let username = value?["username"] as? String ?? ""
  
     
     static func getTechUserData(with safeEmail:String, completion: @escaping (_ isFetched: Bool, _ userValeDic:NSDictionary?) -> Void){
@@ -55,8 +52,6 @@ final class FirebaseDatabaseClass {
             }
         }
     }
-    
-    //update
     
     static func updateTechUser(with user:TechUser , completion: @escaping (Bool) -> Void){
         

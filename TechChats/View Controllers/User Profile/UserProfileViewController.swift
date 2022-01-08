@@ -21,8 +21,6 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
         
         getProfileData()
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,7 +56,7 @@ class UserProfileViewController: UIViewController {
         FirebaseDatabaseClass.getTechUserData(with: userObj.safeEmail) { isDataFetched, userDic in
             if isDataFetched {
                 if let userDic = userDic {
-                    let userName = "\(String(describing: userDic["first_name"])) \(String(describing: userDic["last_name"]))"
+                    let userName = "\(userDic["first_name"] as! String ) \(userDic["last_name"] as! String)"
                     self.lblUserName.text = userName
                     self.lblJobTitle.text = userDic["job_title"] as? String
                     self.lblBio.text = userDic["user_bio"] as? String
@@ -68,7 +66,7 @@ class UserProfileViewController: UIViewController {
             }
         }
         
-        //fetch photo
+        //fetch photo and put it in the userImg
     }
     
     @IBAction func signoutBtnPressed(_ sender: Any) {
