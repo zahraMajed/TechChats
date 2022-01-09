@@ -204,7 +204,7 @@ extension FirebaseDatabaseClass {
                 // conversation array does exixt , append to  it
                 conversations.append(newConversationData)
                 userNode["conversations"] = conversations
-                databaseRef.setValue(userNode) { error, _ in
+                databaseRef.child("\(safeEmail)").setValue(userNode) { error, _ in
                     guard error == nil else {
                         completion(false)
                         return
@@ -215,7 +215,7 @@ extension FirebaseDatabaseClass {
             }else {
                 //conversation array does not exixt , create it
                 userNode["conversations"] = [newConversationData ]
-                databaseRef.setValue(userNode) { error, _ in
+                databaseRef.child("\(safeEmail)").setValue(userNode) { error, _ in
                     guard error == nil else {
                         completion(false)
                         return
