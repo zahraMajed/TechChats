@@ -19,6 +19,7 @@ final class FirebaseAuthClass {
                 completion(false)
                 return
             }
+            UserDefaults.standard.setValue(email, forKey: "email")
             completion(true)
         }
     }
@@ -46,6 +47,7 @@ final class FirebaseAuthClass {
                     let techUserObj = TechUser(firstName: firstName, lastName: lastName, email: email)
                     FirebaseDatabaseClass.insertTechUser(with: techUserObj)
                     //move to profile vc
+                    UserDefaults.standard.setValue(email, forKey: "email")
                     completion(false, true,nil, techUserObj)
                 }
             }

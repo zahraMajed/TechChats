@@ -19,16 +19,20 @@ class SplachViewController: UIViewController {
         if FirebaseAuth.Auth.auth().currentUser == nil {
             let signinVC = storyboard?.instantiateViewController(identifier: "signinVC")
             self.present(signinVC!, animated: true, completion: nil)
-        }else {
+        }else if FirebaseAuth.Auth.auth().currentUser != nil {
             let mainTabBarToChat = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
-            let userEmail = FirebaseAuth.Auth.auth().currentUser?.email
-            FirebaseDatabaseClass.getTechUserObj(with: userEmail!) { techUser in
+            
+            guard let userEmail = FirebaseAuth.Auth.auth().currentUser?.email else {
+               print("user email is nil in splach")
+                return
+           }
+            FirebaseDatabaseClass.getTechUserObj(with: userEmail) { techUser in
                 print(" inside splach: \(techUser)")
                 mainTabBarToChat.techUserObj = techUser
             }
             mainTabBarToChat.selectedIndex = 0
             self.present(mainTabBarToChat, animated: true, completion: nil)
-            
+           
         }
     }
 

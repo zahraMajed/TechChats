@@ -93,7 +93,7 @@ class UserEditProfileViewController: UIViewController {
             guard let data = data, error == nil else {
                 return
             }
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 let image = UIImage(data: data)
                 self.userImg.image = image
             }

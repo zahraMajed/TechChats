@@ -35,6 +35,8 @@
 		C3D027CC27880E3D00748D8B /* FirebaseStoarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027CB27880E3D00748D8B /* FirebaseStoarge.swift */; };
 		C3D027CE27881F9100748D8B /* mainTabBarC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027CD27881F9100748D8B /* mainTabBarC.swift */; };
 		C3D027D2278A117D00748D8B /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027D1278A117D00748D8B /* FriendsTableViewCell.swift */; };
+		C3D027D5278B29A600748D8B /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = C3D027D4278B29A600748D8B /* MessageKit */; };
+		C3D027D7278B6AFD00748D8B /* ConversationStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D027D6278B6AFD00748D8B /* ConversationStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,7 @@
 		C3D027CB27880E3D00748D8B /* FirebaseStoarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStoarge.swift; sourceTree = "<group>"; };
 		C3D027CD27881F9100748D8B /* mainTabBarC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainTabBarC.swift; sourceTree = "<group>"; };
 		C3D027D1278A117D00748D8B /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		C3D027D6278B6AFD00748D8B /* ConversationStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,7 @@
 				C3C214BC278481640060FD05 /* FirebaseDatabase in Frameworks */,
 				C3C214B6278481640060FD05 /* FirebaseAnalytics in Frameworks */,
 				C3C214AA278478AC0060FD05 /* SwiftEntryKit in Frameworks */,
+				C3D027D5278B29A600748D8B /* MessageKit in Frameworks */,
 				C3C214B8278481640060FD05 /* FirebaseStorage in Frameworks */,
 				C3C214BA278481640060FD05 /* FirebaseAuth in Frameworks */,
 			);
@@ -211,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D027C227859E8800748D8B /* TechUserStruct.swift */,
+				C3D027D6278B6AFD00748D8B /* ConversationStruct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +259,7 @@
 				C3C214B7278481640060FD05 /* FirebaseStorage */,
 				C3C214B9278481640060FD05 /* FirebaseAuth */,
 				C3C214BB278481640060FD05 /* FirebaseDatabase */,
+				C3D027D4278B29A600748D8B /* MessageKit */,
 			);
 			productName = TechChats;
 			productReference = C3C214562784705C0060FD05 /* TechChats.app */;
@@ -285,6 +291,7 @@
 			packageReferences = (
 				C3C214A8278478AC0060FD05 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
 				C3C214B4278481640060FD05 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C3D027D3278B29A600748D8B /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			productRefGroup = C3C214572784705C0060FD05 /* Products */;
 			projectDirPath = "";
@@ -325,6 +332,7 @@
 				C3D027D2278A117D00748D8B /* FriendsTableViewCell.swift in Sources */,
 				C3C21492278475D20060FD05 /* SplachViewController.swift in Sources */,
 				C3C214A0278476C30060FD05 /* RecentChatsViewController.swift in Sources */,
+				C3D027D7278B6AFD00748D8B /* ConversationStruct.swift in Sources */,
 				C3C2145C2784705C0060FD05 /* SceneDelegate.swift in Sources */,
 				C3C214C3278482CA0060FD05 /* FireBaseDatabase.swift in Sources */,
 				C3D027CE27881F9100748D8B /* mainTabBarC.swift in Sources */,
@@ -550,6 +558,14 @@
 				minimumVersion = 8.10.0;
 			};
 		};
+		C3D027D3278B29A600748D8B /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -577,6 +593,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C3C214B4278481640060FD05 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		C3D027D4278B29A600748D8B /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3D027D3278B29A600748D8B /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
