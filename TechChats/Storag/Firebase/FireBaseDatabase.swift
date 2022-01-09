@@ -50,9 +50,7 @@ final class FirebaseDatabaseClass {
         }
     }
     
-    static func getTechUserObj(with email:String) -> TechUser {
-        var firstName = ""; var lastName = ""; var jobTitle = "";
-        var bio = ""; var linkedinLink = ""; var githubLink = "";
+    static func getTechUserObj(with email:String, completion: @escaping (TechUser)-> Void) {
         
         var safeEmail = email.replacingOccurrences(of: ".", with: "-")
         safeEmail =  safeEmail.replacingOccurrences(of: "@", with: "-")
@@ -62,16 +60,16 @@ final class FirebaseDatabaseClass {
                 print("Fail to fetch data")
                 return
             }
-            firstName = value["first_name"] as! String
-            lastName = value["last_name"] as! String
-            jobTitle = value["job_title"] as! String
-            bio = value["user_bio"] as! String
-            linkedinLink = value["linkedin_link"] as! String
-            githubLink = value["github_link"] as! String
+            let firstName = value["first_name"] as! String
+            let lastName = value["last_name"] as! String
+            let jobTitle = value["job_title"] as! String
+            let bio = value["user_bio"] as! String
+            let linkedinLink = value["linkedin_link"] as! String
+            let githubLink = value["github_link"] as! String
             print(firstName)
+            let t = TechUser(firstName: firstName, lastName: lastName, email: email, jobTitle: jobTitle, bio: bio, linkedinLink: linkedinLink, gitHubLinked: githubLink)
+            completion(t)
         }
-        
-        return TechUser(firstName: firstName, lastName: lastName, email: email, jobTitle: jobTitle, bio: bio, linkedinLink: linkedinLink, gitHubLinked: githubLink)
     }
     
     

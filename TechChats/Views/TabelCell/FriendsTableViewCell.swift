@@ -12,7 +12,6 @@ class FriendsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userProfileImg: UIImageView!
     @IBOutlet weak var lblUserName: UILabel!
-    
     @IBOutlet weak var lblJobTitle: UILabel!
     
     override func awakeFromNib() {

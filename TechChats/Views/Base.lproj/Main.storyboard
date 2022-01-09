@@ -700,9 +700,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="lblJobTitle" destination="b4h-vp-CfA" id="0yX-Gj-wtQ"/>
+                                            <outlet property="lblJobTitle" destination="b4h-vp-CfA" id="ODS-5l-FNk"/>
                                             <outlet property="lblUserName" destination="cVa-eB-TdJ" id="pmg-Sa-E0U"/>
-                                            <outlet property="userProfileImg" destination="Q3I-il-Mfb" id="egs-gK-sjA"/>
+                                            <outlet property="userProfileImg" destination="Q3I-il-Mfb" id="vI7-8a-sdl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

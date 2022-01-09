@@ -37,10 +37,12 @@ class SignInViewController: UIViewController {
                 if isSigedin {
                     print("User has signed in successfully")
                     let mainTabBarToChat = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
-                    if let userObj = self.getTechUserObj(with: userEmail) {
-                        mainTabBarToChat.techUserObj = userObj
-                        print(" inside signin: \(userObj)")
+                    
+                    FirebaseDatabaseClass.getTechUserObj(with: userEmail) { techUser in
+                        print(" inside signin: \(techUser)")
+                        mainTabBarToChat.techUserObj = techUser
                     }
+            
                     mainTabBarToChat.selectedIndex = 0
                     self.present(mainTabBarToChat, animated: true, completion: nil)
                 }else if !isSigedin {
@@ -54,10 +56,6 @@ class SignInViewController: UIViewController {
             }
         }}
     
-    func getTechUserObj(with email:String) -> TechUser?{
-        return FirebaseDatabaseClass.getTechUserObj(with: email)
-    }
-
 }
 
 extension SignInViewController: UITextFieldDelegate {
