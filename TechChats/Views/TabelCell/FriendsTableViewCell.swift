@@ -9,8 +9,8 @@ import UIKit
 
 class FriendsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var userImg: UIView!
     
+    @IBOutlet weak var userProfileImg: UIImageView!
     @IBOutlet weak var lblUserName: UILabel!
     
     @IBOutlet weak var lblJobTitle: UILabel!

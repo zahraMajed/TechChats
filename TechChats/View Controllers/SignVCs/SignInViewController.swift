@@ -36,7 +36,11 @@ class SignInViewController: UIViewController {
             FirebaseAuthClass.signUserIn(email: userEmail, password: userPasaword) { isSigedin in
                 if isSigedin {
                     print("User has signed in successfully")
-                    let mainTabBarToChat = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! UITabBarController
+                    let mainTabBarToChat = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
+                    if let userObj = self.getTechUserObj(with: userEmail) {
+                        mainTabBarToChat.techUserObj = userObj
+                        print(" inside signin: \(userObj)")
+                    }
                     mainTabBarToChat.selectedIndex = 0
                     self.present(mainTabBarToChat, animated: true, completion: nil)
                 }else if !isSigedin {
@@ -49,6 +53,10 @@ class SignInViewController: UIViewController {
                 }
             }
         }}
+    
+    func getTechUserObj(with email:String) -> TechUser?{
+        return FirebaseDatabaseClass.getTechUserObj(with: email)
+    }
 
 }
 

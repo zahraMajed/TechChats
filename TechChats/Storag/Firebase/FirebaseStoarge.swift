@@ -41,4 +41,14 @@ final class FirebaseStorageClass {
         case FaildToDownload
     }
     
+    static func downloadURL(for path:String, completion: @escaping (Result<URL,Error>)-> Void){
+        storageRef.child(path).downloadURL { url, error in
+            guard let url = url, error == nil else {
+                completion(.failure(StoargeErrors.FaildToDownload))
+                return
+            }
+            completion(.success(url))
+        }
+    }
+    
 }

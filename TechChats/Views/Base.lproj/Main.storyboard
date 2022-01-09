@@ -702,7 +702,7 @@
                                         <connections>
                                             <outlet property="lblJobTitle" destination="b4h-vp-CfA" id="0yX-Gj-wtQ"/>
                                             <outlet property="lblUserName" destination="cVa-eB-TdJ" id="pmg-Sa-E0U"/>
-                                            <outlet property="userImg" destination="bPa-vM-jHq" id="RBf-ON-fCf"/>
+                                            <outlet property="userProfileImg" destination="Q3I-il-Mfb" id="egs-gK-sjA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -724,7 +724,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Friend" id="0Iu-3u-gEE"/>
                     <connections>
-                        <outlet property="freindsTableView" destination="lYU-Ar-5rc" id="doP-1j-2fQ"/>
+                        <outlet property="freindsTableView" destination="lYU-Ar-5rc" id="dM6-X5-soN"/>
                         <outlet property="searchTF" destination="oEX-6t-gYT" id="XNV-Cg-r6g"/>
                     </connections>
                 </viewController>

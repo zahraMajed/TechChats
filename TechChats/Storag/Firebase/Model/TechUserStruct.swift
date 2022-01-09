@@ -23,8 +23,4 @@ struct TechUser {
     var bio:String?
     var linkedinLink:String?
     var gitHubLinked:String?
-    
-    //optins 
-    //let image
-   
 }

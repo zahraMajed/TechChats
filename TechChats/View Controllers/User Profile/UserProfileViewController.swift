@@ -65,8 +65,32 @@ class UserProfileViewController: UIViewController {
               }
             }
         }
-        
-        //fetch photo and put it in the userImg
+    
+        self.getUserProfilePicture(with: userObj.profilePictureFileName)
+    }
+    
+    func getUserProfilePicture(with profilePictureFileName:String){
+        let path =  "images/"+profilePictureFileName
+        FirebaseStorageClass.downloadURL(for: path) { result in
+            switch result {
+            case .success(let url):
+                self.downloadImage(url: url)
+            case .failure(let error):
+                print("Faild to get dowload URL: \(error)")
+            }
+        }
+    }
+    
+    func downloadImage(url:URL){
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.sync {
+                let image = UIImage(data: data)
+                self.userImg.image = image
+            }
+      }.resume()
     }
     
     @IBAction func signoutBtnPressed(_ sender: Any) {
@@ -93,6 +117,5 @@ class UserProfileViewController: UIViewController {
     @IBAction func githubBtnPressed(_ sender: Any) {
         //alert with githun link
     }
-    
     
 }

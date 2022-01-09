@@ -26,8 +26,11 @@ class UserEditProfileViewController: UIViewController {
         linkedinURLTF.delegate = self
         githubURLTF.delegate = self
         userBioTV.layer.borderWidth = 0.5
+        userBioTV.text = "Bio"
+        userBioTV.textColor = UIColor.lightGray
         
         print("inside edit profile")
+        
         putUserData()
         
         
@@ -68,9 +71,33 @@ class UserEditProfileViewController: UIViewController {
         }
         
         // set photo
-        // call method that send a fileName nad it fetch and return user photo
-        //techUser.profilePictureFileName
-        
+        getUserProfilePicture(with: techUser.profilePictureFileName)
+    }
+    
+    func getUserProfilePicture(with profilePictureFileName:String){
+        let path =  "images/"+profilePictureFileName
+        FirebaseStorageClass.downloadURL(for: path) { result in
+            switch result {
+            case .success(let url):
+                self.downloadImage(url: url)
+            case .failure(let error):
+                self.storeProfilePhotoInFBStoarge(with: profilePictureFileName)
+                self.putUserData()
+                print("Faild to get dowload URL: \(error)")
+            }
+        }
+    }
+    
+    func downloadImage(url:URL){
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.sync {
+                let image = UIImage(data: data)
+                self.userImg.image = image
+            }
+      }.resume()
     }
     
     func getTechUserObj()-> TechUser? {
@@ -134,10 +161,7 @@ class UserEditProfileViewController: UIViewController {
             mainTabBarVC.techUserObj = userObj
             mainTabBarVC.selectedIndex = 1
             self.present(mainTabBarVC, animated: true, completion: nil)
-                
-            //let userProfile = self.storyboard?.instantiateViewController(identifier: "userProfileVC") as! UserProfileViewController
-            //userProfile.techUserObj = userObj
-            //self.present(userProfile, animated: true, completion: nil)
+         
             }
         
     }
@@ -199,6 +223,20 @@ extension UserEditProfileViewController: UITextFieldDelegate, UITextViewDelegate
             view.frame.origin.y = 0
         }
         
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Bio"
+            textView.textColor = UIColor.lightGray
+        }
     }
     
     func openImagePicker() {
