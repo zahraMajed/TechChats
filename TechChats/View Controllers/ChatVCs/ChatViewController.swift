@@ -33,9 +33,9 @@ class ChatViewController: MessagesViewController  {
     }
     
     var otherUserEmail:String?
-    var senderVC:String?
-    var isNewConversation = false
+    var conversationId: String?
     
+    var isNewConversation = false
     var messages = [Message]()
     var selfSender: Sender? {
         guard let email = UserDefaults.standard.value(forKey: "email")  as? String else {
@@ -55,22 +55,6 @@ class ChatViewController: MessagesViewController  {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
-    }
-    
-    
-    @IBAction func cancelBtnPressed(_ sender: Any) {
-        guard let senderVC = senderVC else {
-            return
-        }
-        let mainTabBarToChat = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
-        if senderVC == "friends" {
-            //go back to friend
-            mainTabBarToChat.selectedIndex = 2
-        }else if senderVC == "recentChats" {
-            //go back to recent chat
-            mainTabBarToChat.selectedIndex = 0
-        }
-        self.present(mainTabBarToChat, animated: true, completion: nil)
     }
     
 }

@@ -254,6 +254,7 @@
                     <connections>
                         <outlet property="recentChatsTableView" destination="lCx-KK-5Tt" id="IYu-zE-RVy"/>
                         <outlet property="searchTF" destination="0qT-b3-hku" id="fGy-D9-Mnh"/>
+                        <segue destination="MGj-rv-WCJ" kind="show" identifier="goToChatFromRecent" id="u7P-5h-0mD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSI-ID-V0R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -769,6 +770,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="GU6-YS-eRP"/>
+        <segue reference="u7P-5h-0mD"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="defaultPhoto" width="414" height="287"/>

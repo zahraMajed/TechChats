@@ -97,28 +97,25 @@ extension TechUserViewController:UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //start conversation
+        tableView.deselectRow(at: indexPath, animated: true)
         let targetUser = allUsersarray[indexPath.row]
+        openConversation(targetUser)
         print(targetUser)
-        performSegue(withIdentifier: "goToChat", sender: targetUser)
-            
-        //dismiss(animated: true) {[weak self] in
-        //self?.completion?(targetUser)
-        //}
+        //performSegue(withIdentifier: "goToChat", sender: targetUser)
+  
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToChat" {
-            let chatVc = segue.destination as! ChatViewController
-            chatVc.isNewConversation = true
     
-            let targetUser = sender as! [String:String]
-            print(targetUser)
-            guard let name = targetUser["name"] , let email = targetUser["email"]  else  {
-                print("can not get other user data")
-               return
-            }
-            chatVc.otherUserEmail = email
-            chatVc.senderVC = "friends"
-            chatVc.title = name
+    func openConversation(_ targetUser: [String:String]) {
+        let chatVc = ChatViewController()
+        chatVc.isNewConversation = true
+        guard let name = targetUser["name"] , let email = targetUser["email"]  else  {
+            print("can not get other user data")
+           return
         }
+        chatVc.otherUserEmail = email
+        chatVc.title = name
+        chatVc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(chatVc, animated: true)
     }
+   
 }

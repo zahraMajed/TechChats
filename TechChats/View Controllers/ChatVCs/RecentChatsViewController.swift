@@ -82,5 +82,21 @@ extension RecentChatsViewController:UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+              let model = conversationsArray[indexPath.row]
+              openConversation(model)
+        //goToChatFromRecent
+    }
+    
+    func openConversation(_ model: Conversation) {
+        let vc = ChatViewController()
+        vc.title = model.name
+        vc.otherUserEmail = model.otherUserEmail
+        vc.conversationId = model.id
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
