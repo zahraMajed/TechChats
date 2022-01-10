@@ -37,7 +37,6 @@ class SignInViewController: UIViewController {
                 if isSigedin {
                     print("User has signed in successfully")
                     let mainTabBarToChat = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
-                    
                     FirebaseDatabaseClass.getTechUserObj(with: userEmail) { techUser in
                         print(" inside signin: \(techUser)")
                         mainTabBarToChat.techUserObj = techUser

@@ -117,6 +117,7 @@ extension TechUserViewController:UITableViewDataSource, UITableViewDelegate{
                return
             }
             chatVc.otherUserEmail = email
+            chatVc.senderVC = "friends"
             chatVc.title = name
         }
     }

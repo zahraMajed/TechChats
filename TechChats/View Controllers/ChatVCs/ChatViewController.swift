@@ -33,6 +33,7 @@ class ChatViewController: MessagesViewController  {
     }
     
     var otherUserEmail:String?
+    var senderVC:String?
     var isNewConversation = false
     
     var messages = [Message]()
@@ -55,7 +56,23 @@ class ChatViewController: MessagesViewController  {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
     }
-
+    
+    
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        guard let senderVC = senderVC else {
+            return
+        }
+        let mainTabBarToChat = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
+        if senderVC == "friends" {
+            //go back to friend
+            mainTabBarToChat.selectedIndex = 2
+        }else if senderVC == "recentChats" {
+            //go back to recent chat
+            mainTabBarToChat.selectedIndex = 0
+        }
+        self.present(mainTabBarToChat, animated: true, completion: nil)
+    }
+    
 }
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
