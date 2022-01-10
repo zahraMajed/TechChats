@@ -62,7 +62,7 @@ extension RecentChatsViewController:UITableViewDataSource, UITableViewDelegate{
         let cell =  tableView.dequeueReusableCell(withIdentifier: "userChatCell") as! RecentChatTableViewCell
         cell.lblUserName.text = conversationsArray[indexPath.row].name
         cell.lblUserName.text = conversationsArray[indexPath.row].latestMessage.text
-        let path = "\(conversationsArray[indexPath.row].otherUserEmail)_profile_picture.png"
+        let path = "images/\(conversationsArray[indexPath.row].otherUserEmail)_profile_picture.png"
         FirebaseStorageClass.downloadURL(for: path) { result in
             switch result {
             case .success(let url):
