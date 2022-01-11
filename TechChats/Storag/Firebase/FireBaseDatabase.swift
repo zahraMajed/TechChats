@@ -156,6 +156,9 @@ extension FirebaseDatabaseClass {
         var safeEmail = currentEmail.replacingOccurrences(of: ".", with: "-")
         safeEmail =  safeEmail.replacingOccurrences(of: "@", with: "-")
         
+        var otherUserEamilSafe = otherUserEmail.replacingOccurrences(of: ".", with: "-")
+        otherUserEamilSafe =  otherUserEamilSafe.replacingOccurrences(of: "@", with: "-")
+        
         databaseRef.child("\(safeEmail)").observeSingleEvent(of: .value) { dataSnapshot in
             guard var userNode = dataSnapshot.value as? [String: Any] else {
                 completion(false)
@@ -163,9 +166,16 @@ extension FirebaseDatabaseClass {
                 return
             }
             
+            // i want these data to put them in conversation array:
+            // otherUserEmail, conversation Id, name, latestMessage
+            // latestMessaga as array that need: messageDate as String , message, isRead
+            
+            let conversationId = "conversation_\(firstMessage.messageId)"
+            // latestMessage data
             let messageDate = firstMessage.sentDate
             let dateString = ChatViewController.dataFormatter.string(from: messageDate)
             var message = ""
+    
             switch firstMessage.kind {
             case .text(let messageText):
               message = messageText
@@ -189,11 +199,9 @@ extension FirebaseDatabaseClass {
                 break
             }
             
-            let conversationId = "conversation_\(firstMessage.messageId)"
-            
             let newConversationData: [String:Any] = [
                 "id" : conversationId,
-                "other_user_email": otherUserEmail,
+                "other_user_email": otherUserEamilSafe,
                 "name": name,
                 "latest_message": [
                     "date": dateString,
@@ -214,15 +222,15 @@ extension FirebaseDatabaseClass {
             ]
             
             //update recipent user conversation entry
-            databaseRef.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value, with: { snapshot in
+            databaseRef.child("\(otherUserEamilSafe)/conversations").observeSingleEvent(of: .value, with: { snapshot in
                 if var conversatoins = snapshot.value as? [[String: Any]] {
                     // append
                     conversatoins.append(recipient_newConversationData)
-                    self.databaseRef.child("\(otherUserEmail)/conversations").setValue(conversatoins)
+                    self.databaseRef.child("\(otherUserEamilSafe)/conversations").setValue(conversatoins)
                 }
                 else {
                     // create
-                    self.databaseRef.child("\(otherUserEmail)/conversations").setValue([recipient_newConversationData])
+                    self.databaseRef.child("\(otherUserEamilSafe)/conversations").setValue([recipient_newConversationData])
                 }
             })
             
@@ -237,18 +245,16 @@ extension FirebaseDatabaseClass {
                         return
                     }
                     finishCreatingConversation(name:name,conversationId: conversationId, firstMessage:firstMessage, completion: completion)
-                   // completion(true)
                 }
             }else {
                 //conversation array does not exixt , create it
-                userNode["conversations"] = [newConversationData ]
+                userNode["conversations"] = [newConversationData]
                 databaseRef.child("\(safeEmail)").setValue(userNode) { error, _ in
                     guard error == nil else {
                         completion(false)
                         return
                     }
                     finishCreatingConversation(name:name, conversationId: conversationId, firstMessage:firstMessage, completion: completion)
-                    //completion(true)
                 }
             }
         }
@@ -264,23 +270,7 @@ extension FirebaseDatabaseClass {
         switch firstMessage.kind {
         case .text(let messageText):
           message = messageText
-        case .attributedText(_):
-            break
-        case .photo(_):
-            break
-        case .video(_):
-            break
-        case .location(_):
-            break
-        case .emoji(_):
-            break
-        case .audio(_):
-            break
-        case .contact(_):
-            break
-        case .linkPreview(_):
-            break
-        case .custom(_):
+        case .attributedText(_), .photo(_), .video(_), .location(_), .emoji(_), .audio(_), .contact(_),.custom(_), .linkPreview(_):
             break
         }
         
@@ -301,6 +291,7 @@ extension FirebaseDatabaseClass {
             "is_read": false,
             "name": name
         ]
+        
         let value:[String:Any] = [
             "messages": [
                 collectionMessage
@@ -352,15 +343,15 @@ extension FirebaseDatabaseClass {
             }
             let messages:[Message] = value.compactMap { dictionary in
                 guard let name = dictionary["name"] as? String,
-                                  let isRead = dictionary["is_read"] as? Bool,
-                                  let messageID = dictionary["id"] as? String,
-                                  let content = dictionary["content"] as? String,
-                                  let senderEmail = dictionary["sender_email"] as? String,
-                                  let type = dictionary["type"] as? String,
-                                  let dateString = dictionary["date"] as? String,
-                                  let date = ChatViewController.dataFormatter.date(from: dateString) else {
-                                      return nil
-                              }
+                      let isRead = dictionary["is_read"] as? Bool,
+                      let messageID = dictionary["id"] as? String,
+                      let content = dictionary["content"] as? String,
+                      let senderEmail = dictionary["sender_email"] as? String,
+                      let type = dictionary["type"] as? String,
+                      let dateString = dictionary["date"] as? String,
+                      let date = ChatViewController.dataFormatter.date(from: dateString) else {
+                    return nil
+                }
                 
                 let sender = Sender(photoURL: "", senderId: senderEmail, displayName: name)
                 return Message(sender: sender, messageId: messageID, sentDate: date, kind: .text(dateString))
@@ -375,7 +366,6 @@ extension FirebaseDatabaseClass {
         // update sender latest message
         // update recipient latest message
         
-        
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
             completion(false)
             return
@@ -383,6 +373,9 @@ extension FirebaseDatabaseClass {
         
         var currentUserEmailSafe = currentUserEmail.replacingOccurrences(of: ".", with: "-")
         currentUserEmailSafe =  currentUserEmailSafe.replacingOccurrences(of: "@", with: "-")
+        
+        var otherUserEamilSafe = otherUserEmail.replacingOccurrences(of: ".", with: "-")
+        otherUserEamilSafe =  otherUserEamilSafe.replacingOccurrences(of: "@", with: "-")
         
         databaseRef.child("\(conversationId)/messages").observeSingleEvent(of: .value) { dataSnapshot in
             guard var currentMessages = dataSnapshot.value as?  [[String:Any]] else {
@@ -442,13 +435,125 @@ extension FirebaseDatabaseClass {
                     return
                 }
                 
-                
-            }
+                // update sender latest message
+                databaseRef.child("\(currentUserEmailSafe)/conversations").observeSingleEvent(of: .value) { snapshot in
+                    var databaseEntryConversations = [[String: Any]]()
+                    let updatedLatestMessageValue: [String: Any] = [
+                        "date": dateString,
+                        "is_read": false,
+                        "message": message
+                    ]
+                    
+                    if var currentUserConversations = snapshot.value as? [[String: Any]] {
+                        var targetConversation: [String: Any]?
+                        var position = 0 // it will be the index of targetConversation
+
+                        for conversationDictionary in currentUserConversations {
+                            if let currentId = conversationDictionary["id"] as? String, currentId == conversationId {
+                                targetConversation = conversationDictionary
+                                break
+                            }
+                            position += 1
+                        }
+                        
+                        if var targetConversation = targetConversation {
+                            //if we have founded  taregt conversation, update latest msg
+                            targetConversation["latest_message"] = updatedLatestMessageValue
+                            currentUserConversations[position] = targetConversation
+                            databaseEntryConversations = currentUserConversations
+                        }else {
+                            let newConversationData: [String: Any] = [
+                                "id": conversationId,
+                                "other_user_email": otherUserEamilSafe,
+                                "name": name,
+                                "latest_message": updatedLatestMessageValue
+                            ]
+                            currentUserConversations.append(newConversationData)
+                            databaseEntryConversations = currentUserConversations
+                        }
+                    }else {
+                        let newConversationData: [String: Any] = [
+                            "id": conversationId,
+                            "other_user_email": otherUserEamilSafe,
+                            "name": name,
+                            "latest_message": updatedLatestMessageValue
+                        ]
+                        databaseEntryConversations = [
+                            newConversationData
+                        ]
+                    }
+                    
+                    databaseRef.child("\(currentUserEmailSafe)/conversations").setValue(databaseEntryConversations) { error, _ in
+                        guard error == nil else {
+                            completion(false)
+                            return
+                        }
+                        
+                        // Update recipient latest message
+                        databaseRef.child("\(otherUserEamilSafe)/conversations").observeSingleEvent(of: .value){ snapshot in
+                            var databaseEntryConversations = [[String: Any]]()
+                            let updatedLatestMessageValue: [String: Any] = [
+                                "date": dateString,
+                                "is_read": false,
+                                "message": message
+                            ]
+                            
+                            guard let currentName = UserDefaults.standard.value(forKey: "name") as? String else {
+                                return
+                            }
+                            
+                            if var othertUserConversations = snapshot.value as? [[String: Any]] {
+                                var targetConversation: [String: Any]?
+                                var position = 0
+
+                                for conversationDictionary in othertUserConversations {
+                                    if let currentId = conversationDictionary["id"] as? String, currentId == conversationId {
+                                        targetConversation = conversationDictionary
+                                        break
+                                    }
+                                    position += 1
+                                }
+                                
+                                if var targetConversation = targetConversation {
+                                    //if we have founded  taregt conversation, update latest msg
+                                    targetConversation["latest_message"] = updatedLatestMessageValue
+                                    othertUserConversations[position] = targetConversation
+                                    databaseEntryConversations = othertUserConversations
+                                }else {
+                                    let newConversationData: [String: Any] = [
+                                        "id": conversationId,
+                                        "other_user_email": currentUserEmailSafe,
+                                        "name": currentName,
+                                        "latest_message": updatedLatestMessageValue
+                                    ]
+                                    othertUserConversations.append(newConversationData)
+                                    databaseEntryConversations = othertUserConversations
+                                }
+                            }else {
+                                let newConversationData: [String: Any] = [
+                                    "id": conversationId,
+                                    "other_user_email": currentUserEmailSafe,
+                                    "name": currentName,
+                                    "latest_message": updatedLatestMessageValue
+                                ]
+                                databaseEntryConversations = [
+                                    newConversationData
+                                ]
+                            }
+                            databaseRef.child("\(currentUserEmailSafe)/conversations").setValue(databaseEntryConversations) { error, _ in
+                                guard error == nil else {
+                                    completion(false)
+                                    return
+                                }
+                                completion(true)
+                            }//end set value of databaseEntryConversations of other user
+                        }// end observing of other user
+                    }// end set value of databaseEntryConversations of current user
+            }//end observing of current user
             
         }
         
     }
     
 }
-
-
+}
