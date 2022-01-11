@@ -13,7 +13,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
-    
+    var userObj:TechUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class SignUpViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
 
-    @IBAction func signupBtnPressed(_ sender: Any) {
+    @IBAction func signupBtnPressed(_ sender: UIButton) {
         if let firstName = firstNameTF.text, let lastName = lastNameTF.text, let email = emailTF.text, let password = passwordTF.text {
             
             if firstName.isEmpty && lastName.isEmpty && email.isEmpty && password.isEmpty {
@@ -54,25 +54,49 @@ class SignUpViewController: UIViewController {
                     if !isSignedUp {
                         //show alert here with error info
                         print("Faild to create a user - \(errorInfo!)")
-                    }else if isSignedUp {
+                        return
+                    }else
+                    if isSignedUp {
                         //show alert here
                         print("User has signed up successfully")
-                        //self.dismiss(animated: false, completion: nil)
-                        let editProfile = self.storyboard?.instantiateViewController(identifier: "userEditProfileVC") as! UserEditProfileViewController
+                        
+                        if let techUserObj = techUSerObj {
+                            self.userObj = techUserObj
+                            print(self.userObj!)
+                            print("in btn pressed")
+                        }
+                        
+                        let editProfileNav = self.storyboard?.instantiateViewController(identifier: "editProfileNav") as! UINavigationController
+                        let editProfile = editProfileNav.topViewController as! UserEditProfileViewController
                         if let techUserObj = techUSerObj {
                             editProfile.techUserObj = techUserObj
-                            print("still in signup")
                             print(editProfile.techUserObj!)
+                            print("in btn pressed")
                         }
-                        self.present(editProfile, animated: true, completion: nil)
+                        self.present(editProfileNav, animated: true, completion: nil)
+                        
+                        //self.performSegue(withIdentifier: "goToeditProfileNav", sender: self.signupBtnPressed(_:))
                         
                     }//end last else if
                 }
-                
             }
         }
         hideKeyboard()
     }
+    
+    /*
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToeditProfileNav" {
+            let destination = segue.destination as! UINavigationController
+            let editProfile = destination.topViewController as! UserEditProfileViewController
+            if let user = userObj {
+                print(" in prepare")
+                editProfile.techUserObj = user
+                print(editProfile.techUserObj!)
+            }
+            
+        }
+    }*/
 }
 
 extension SignUpViewController: UITextFieldDelegate {

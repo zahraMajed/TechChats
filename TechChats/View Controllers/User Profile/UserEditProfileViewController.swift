@@ -25,6 +25,7 @@ class UserEditProfileViewController: UIViewController {
         userBioTV.delegate = self
         linkedinURLTF.delegate = self
         githubURLTF.delegate = self
+        
         userBioTV.layer.borderWidth = 0.5
         userBioTV.text = "Bio"
         userBioTV.textColor = UIColor.lightGray
@@ -32,7 +33,6 @@ class UserEditProfileViewController: UIViewController {
         print("inside edit profile")
         
         putUserData()
-        
         
         //listen for keyboard event
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -46,16 +46,19 @@ class UserEditProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
+    
+    
     func putUserData(){
         
         guard  let techUser = techUserObj else {
             print("tech user is still nil")
             return
         }
+        
         userNameTF.text = "\(techUser.firstName) \(techUser.lastName)"
         
         guard let jobTitle = techUser.jobTitle, let userBio = techUser.bio else {
-            print("put data: only user name is exist ")
+            print("put data function: only user name is exist ")
             return
         }
         

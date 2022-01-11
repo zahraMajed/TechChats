@@ -33,15 +33,17 @@ class ChatViewController: MessagesViewController  {
     }
     
     var otherUserEmail:String?
-    var conversationId: String?
+    var conversationId: String? // if converation created
     
     var isNewConversation = false
-    var messages = [Message]()
+    var messagesArray = [Message]()
     var selfSender: Sender? {
         guard let email = UserDefaults.standard.value(forKey: "email")  as? String else {
             return nil
         }
-        return Sender(photoURL: "", senderId: email , displayName: "") }
+        var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        safeEmail =  safeEmail.replacingOccurrences(of: "@", with: "-")
+        return Sender(photoURL: "", senderId: safeEmail , displayName: "Me") }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +52,39 @@ class ChatViewController: MessagesViewController  {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
+        
+        if let conversaionID = conversationId {
+            listernForMessages(conversationId: conversaionID, shouldScrollToBottom:true)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
+    }
+    
+    func listernForMessages(conversationId: String, shouldScrollToBottom:Bool){
+        FirebaseDatabaseClass.getAllMessagesForConversation(with: conversationId) { result in
+            switch result {
+                       case .success(let messages):
+                           print("success in getting messages: \(messages)")
+                           guard !messages.isEmpty else {
+                               print("messages are empty")
+                               return
+                           }
+                        self.messagesArray = messages
+                        
+                        DispatchQueue.main.async {
+                            self.messagesCollectionView.reloadDataAndKeepOffset()
+
+                            if shouldScrollToBottom {
+                                self.messagesCollectionView.scrollToBottom()
+                            }
+                        }
+                       case .failure(let error):
+                           print("failed to get messages: \(error)")
+            }
+        }
     }
     
 }
@@ -68,27 +98,37 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         }
         
         //send msg
+        let message = Message(sender: selfSender,
+                              messageId: messageId,
+                              sentDate: Date(),
+                              kind: .text(text))
+        
         if isNewConversation {
             // create convo in database
-            let message = Message(sender: selfSender,
-                                  messageId: messageId,
-                                  sentDate: Date(),
-                                  kind: .text(text))
             guard let otherUserEmail = otherUserEmail else {
                 return
             }
-            
             FirebaseDatabaseClass.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message) { success in
                 if success {
                     print("Message sent")
+                    self.isNewConversation = false
                 }else {
                     print("Faild to send")
                 }
             }
         }else {
             //append to exiting convo data
+            guard let conversationID = conversationId, let name = self.title  else {
+                return
+            }
+            FirebaseDatabaseClass.sendMessage(to: conversationID, name:name , newMessage: message) { success in
+                if success {
+                    print("message sent")
+                }else {
+                    print("Faild to sent")
+                }
+            }
         }
-        
     }
     
     func createMsgID() -> String? {
@@ -118,11 +158,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        return messages[indexPath.section]
+        return messagesArray[indexPath.section]
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        return messages.count
+        return messagesArray.count
     }
     
 }

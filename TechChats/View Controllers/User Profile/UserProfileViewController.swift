@@ -23,20 +23,10 @@ class UserProfileViewController: UIViewController {
         getProfileData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false
-    }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "gotToEditProfile" {
-            let userEditProfileVC = segue.destination as! UserEditProfileViewController
+            let destination = segue.destination as! UINavigationController
+            let userEditProfileVC = destination.topViewController as! UserEditProfileViewController
             techUserObj = getTechUserObj()
             if let techUserObj = techUserObj {
                 print("tech user in profile from tabBar \(techUserObj)")

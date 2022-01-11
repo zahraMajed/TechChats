@@ -20,6 +20,7 @@ final class FirebaseAuthClass {
                 return
             }
             UserDefaults.standard.setValue(email, forKey: "email")
+            UserDefaults.standard.setValue(getNameWith(email: email), forKey: "name")
             completion(true)
         }
     }
@@ -48,6 +49,7 @@ final class FirebaseAuthClass {
                     FirebaseDatabaseClass.insertTechUser(with: techUserObj)
                     //move to profile vc
                     UserDefaults.standard.setValue(email, forKey: "email")
+                    UserDefaults.standard.setValue(getNameWith(email: email), forKey: "name")
                     completion(false, true,nil, techUserObj)
                 }
             }
@@ -64,5 +66,19 @@ final class FirebaseAuthClass {
             completion(false)
         }
         
+    }
+    
+    static func getNameWith(email:String) -> String {
+        var userName = ""
+        var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        safeEmail =  safeEmail.replacingOccurrences(of: "@", with: "-")
+        FirebaseDatabaseClass.getTechUserData(with: safeEmail) { isDataFetched, userDic in
+            if isDataFetched {
+                if let userDic = userDic {
+                    userName = "\(userDic["first_name"] as! String ) \(userDic["last_name"] as! String)"
+              }
+            }
+        }
+        return userName
     }
 }

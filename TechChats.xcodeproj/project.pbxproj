@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3A6AA66278D81AD0087A049 /* TechChatDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A6AA65278D81AD0087A049 /* TechChatDelegates.swift */; };
 		C3C2145A2784705C0060FD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C214592784705C0060FD05 /* AppDelegate.swift */; };
 		C3C2145C2784705C0060FD05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C2145B2784705C0060FD05 /* SceneDelegate.swift */; };
 		C3C214612784705C0060FD05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C2145F2784705C0060FD05 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C3A6AA65278D81AD0087A049 /* TechChatDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechChatDelegates.swift; sourceTree = "<group>"; };
 		C3C214562784705C0060FD05 /* TechChats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechChats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C214592784705C0060FD05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C2145B2784705C0060FD05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				C3C214592784705C0060FD05 /* AppDelegate.swift */,
 				C3C2145B2784705C0060FD05 /* SceneDelegate.swift */,
+				C3A6AA65278D81AD0087A049 /* TechChatDelegates.swift */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3C214C1278482B90060FD05 /* FireBaseAuth.swift in Sources */,
+				C3A6AA66278D81AD0087A049 /* TechChatDelegates.swift in Sources */,
 				C3D027C327859E8800748D8B /* TechUserStruct.swift in Sources */,
 				C3C2149B2784763F0060FD05 /* UserEditProfileViewController.swift in Sources */,
 				C3C214A5278476F80060FD05 /* TechUserViewController.swift in Sources */,

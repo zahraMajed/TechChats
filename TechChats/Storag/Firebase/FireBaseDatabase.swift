@@ -148,7 +148,8 @@ extension FirebaseDatabaseClass {
     
     /// Create a new conversation with target user and fisrt message sent
     static func createNewConversation(with otherUserEmail:String, name:String ,firstMessage:Message, completion: @escaping (Bool)-> Void ){
-        guard let currentEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+        guard let currentEmail = UserDefaults.standard.value(forKey: "email") as? String,
+              let currentName = UserDefaults.standard.value(forKey: "name") as? String else {
             return
         }
         
@@ -189,6 +190,7 @@ extension FirebaseDatabaseClass {
             }
             
             let conversationId = "conversation_\(firstMessage.messageId)"
+            
             let newConversationData: [String:Any] = [
                 "id" : conversationId,
                 "other_user_email": otherUserEmail,
@@ -200,6 +202,31 @@ extension FirebaseDatabaseClass {
                 ]
             ]
             
+            let recipient_newConversationData: [String:Any] = [
+                "id" : conversationId,
+                "other_user_email": safeEmail,
+                "name": currentName,
+                "latest_message": [
+                    "date": dateString,
+                    "message": message,
+                    "isRead": false
+                ]
+            ]
+            
+            //update recipent user conversation entry
+            databaseRef.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value, with: { snapshot in
+                if var conversatoins = snapshot.value as? [[String: Any]] {
+                    // append
+                    conversatoins.append(recipient_newConversationData)
+                    self.databaseRef.child("\(otherUserEmail)/conversations").setValue(conversatoins)
+                }
+                else {
+                    // create
+                    self.databaseRef.child("\(otherUserEmail)/conversations").setValue([recipient_newConversationData])
+                }
+            })
+            
+            //update current user conversation entry
             if var conversations = userNode["conversations"] as? [[String: Any]] {
                 // conversation array does exixt , append to  it
                 conversations.append(newConversationData)
@@ -317,12 +344,106 @@ extension FirebaseDatabaseClass {
     }
     
     //// Get all messages for given conversation
-    static func getAllMessagesForConversation(with id: String, completion: @escaping (Result<String, Error>) -> Void ) {
-        
+    static func getAllMessagesForConversation(with id: String, completion: @escaping (Result<[Message], Error>) -> Void ) {
+        databaseRef.child("\(id)/messages").observe(.value) { dataSnapshot in
+            guard let value = dataSnapshot.value as? [[String:Any]] else {
+                completion(.failure(DatabaseError.faildToFetch))
+                return
+            }
+            let messages:[Message] = value.compactMap { dictionary in
+                guard let name = dictionary["name"] as? String,
+                                  let isRead = dictionary["is_read"] as? Bool,
+                                  let messageID = dictionary["id"] as? String,
+                                  let content = dictionary["content"] as? String,
+                                  let senderEmail = dictionary["sender_email"] as? String,
+                                  let type = dictionary["type"] as? String,
+                                  let dateString = dictionary["date"] as? String,
+                                  let date = ChatViewController.dataFormatter.date(from: dateString) else {
+                                      return nil
+                              }
+                
+                let sender = Sender(photoURL: "", senderId: senderEmail, displayName: name)
+                return Message(sender: sender, messageId: messageID, sentDate: date, kind: .text(dateString))
+            }
+            completion(.success(messages))
+        }
     }
     
     /// Sends a message with target conversation and messagee
-    static func sendMessage(to conversation: String, message:Message, completion: @escaping (Bool) -> Void){
+    static func sendMessage(to conversationId: String, name:String, newMessage:Message, completion: @escaping (Bool) -> Void){
+        // add new message to messages
+        // update sender latest message
+        // update recipient latest message
+        
+        
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            completion(false)
+            return
+        }
+        
+        var currentUserEmailSafe = currentUserEmail.replacingOccurrences(of: ".", with: "-")
+        currentUserEmailSafe =  currentUserEmailSafe.replacingOccurrences(of: "@", with: "-")
+        
+        databaseRef.child("\(conversationId)/messages").observeSingleEvent(of: .value) { dataSnapshot in
+            guard var currentMessages = dataSnapshot.value as?  [[String:Any]] else {
+                completion(false)
+                return
+            }
+            
+            let messageDate = newMessage.sentDate
+            let dateString = ChatViewController.dataFormatter.string(from: messageDate)
+            var message = ""
+                switch newMessage.kind {
+                case .text(let messageText):
+                    message = messageText
+                case .attributedText(_):
+                    break
+                case .photo(let mediaItem):
+                    if let targetUrlString = mediaItem.url?.absoluteString {
+                        message = targetUrlString
+                    }
+                    break
+                case .video(let mediaItem):
+                    if let targetUrlString = mediaItem.url?.absoluteString {
+                        message = targetUrlString
+                    }
+                    break
+                case .location(let locationData):
+                    let location = locationData.location
+                    message = "\(location.coordinate.longitude),\(location.coordinate.latitude)"
+                    break
+                case .emoji(_):
+                    break
+                case .audio(_):
+                    break
+                case .contact(_):
+                    break
+                case .custom(_), .linkPreview(_):
+                    break
+                }
+            
+            //
+            //
+            
+            let newMessageEntry: [String: Any] = [
+                "id": newMessage.messageId,
+                "type": newMessage.kind.msgKindString,
+                "content": message,
+                "date": dateString,
+                "sender_email": currentUserEmail,
+                "is_read": false,
+                "name": name
+            ]
+            currentMessages.append(newMessageEntry)
+            
+            databaseRef.child("\(conversationId)/messages").setValue(currentMessages) { error, _ in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
+            }
+            
+        }
         
     }
     
