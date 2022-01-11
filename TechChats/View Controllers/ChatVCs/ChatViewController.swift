@@ -23,6 +23,7 @@ struct Sender: SenderType {
 }
 
 class ChatViewController: MessagesViewController  {
+  
     
     static var dataFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -48,9 +49,10 @@ class ChatViewController: MessagesViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        messagesCollectionView.dataSource = self
+        messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        //messagesCollectionView.messageCellDelegate = self
         messageInputBar.delegate = self
         
         if let conversaionID = conversationId {

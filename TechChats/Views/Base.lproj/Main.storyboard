@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <color key="backgroundColor" name="GreenTapColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -392,28 +392,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join us" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svY-uL-RzQ">
-                                <rect key="frame" x="37" y="299" width="340" height="51"/>
+                                <rect key="frame" x="37" y="304" width="340" height="51"/>
                                 <fontDescription key="fontDescription" name="KohinoorGujarati-Regular" family="Kohinoor Gujarati" pointSize="34"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qgt-Hc-32f">
-                                <rect key="frame" x="37" y="370" width="340" height="60"/>
+                                <rect key="frame" x="37" y="375" width="340" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="given-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X1r-Za-AWk">
-                                <rect key="frame" x="37" y="455" width="340" height="60"/>
+                                <rect key="frame" x="37" y="460" width="340" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="family-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-PK-QXC">
-                                <rect key="frame" x="37" y="540" width="340" height="60"/>
+                                <rect key="frame" x="37" y="545" width="340" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-dq-zg6">
-                                <rect key="frame" x="37" y="710" width="340" height="40"/>
+                                <rect key="frame" x="37" y="720" width="340" height="40"/>
                                 <color key="backgroundColor" name="GreenBtnColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <state key="normal" title="SIGNUP">
@@ -424,12 +424,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GFE-DU-L1G">
-                                <rect key="frame" x="37" y="625" width="340" height="60"/>
+                                <rect key="frame" x="37" y="630" width="340" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gdC-zw-DGd">
-                                <rect key="frame" x="91" y="760" width="232.5" height="32"/>
+                                <rect key="frame" x="91" y="780" width="232.5" height="32"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you have an acount? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNd-Lw-rMD">
                                         <rect key="frame" x="0.0" y="0.0" width="177.5" height="32"/>
@@ -459,11 +459,11 @@
                             <constraint firstItem="niY-Xk-dKE" firstAttribute="top" secondItem="MvE-5z-LPs" secondAttribute="top" id="1Hz-xq-S7n"/>
                             <constraint firstItem="2ai-PK-QXC" firstAttribute="width" secondItem="MvE-5z-LPs" secondAttribute="width" multiplier="0.821256" id="29D-CX-XBT"/>
                             <constraint firstItem="Qgt-Hc-32f" firstAttribute="top" secondItem="svY-uL-RzQ" secondAttribute="bottom" constant="20" id="3M9-1m-mBc"/>
-                            <constraint firstItem="gdC-zw-DGd" firstAttribute="top" secondItem="qhh-dq-zg6" secondAttribute="bottom" constant="10" id="7RQ-oj-WdG"/>
+                            <constraint firstItem="gdC-zw-DGd" firstAttribute="top" secondItem="qhh-dq-zg6" secondAttribute="bottom" constant="20" id="7RQ-oj-WdG"/>
                             <constraint firstItem="2ai-PK-QXC" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.0669643" id="A7M-9G-zTc"/>
                             <constraint firstItem="qhh-dq-zg6" firstAttribute="width" secondItem="MvE-5z-LPs" secondAttribute="width" multiplier="0.821256" id="C65-kN-mmh"/>
                             <constraint firstItem="Qgt-Hc-32f" firstAttribute="centerX" secondItem="eqP-Vb-NDj" secondAttribute="centerX" id="ImW-9E-oBj"/>
-                            <constraint firstItem="svY-uL-RzQ" firstAttribute="top" secondItem="niY-Xk-dKE" secondAttribute="bottom" constant="20" id="JEv-tZ-UTH"/>
+                            <constraint firstItem="svY-uL-RzQ" firstAttribute="top" secondItem="niY-Xk-dKE" secondAttribute="bottom" constant="25" id="JEv-tZ-UTH"/>
                             <constraint firstItem="2ai-PK-QXC" firstAttribute="top" secondItem="X1r-Za-AWk" secondAttribute="bottom" constant="25" id="JY7-cn-mWe"/>
                             <constraint firstItem="eqP-Vb-NDj" firstAttribute="trailing" secondItem="svY-uL-RzQ" secondAttribute="trailing" constant="37" id="Kc5-Wx-Fxr"/>
                             <constraint firstItem="niY-Xk-dKE" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.311384" id="L0C-6y-MCt"/>
@@ -473,7 +473,7 @@
                             <constraint firstItem="GFE-DU-L1G" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.0669643" id="U9l-Df-3g7"/>
                             <constraint firstItem="svY-uL-RzQ" firstAttribute="leading" secondItem="eqP-Vb-NDj" secondAttribute="leading" constant="37" id="WF6-hm-EOF"/>
                             <constraint firstItem="GFE-DU-L1G" firstAttribute="top" secondItem="2ai-PK-QXC" secondAttribute="bottom" constant="25" id="XlV-pm-g00"/>
-                            <constraint firstItem="qhh-dq-zg6" firstAttribute="top" secondItem="GFE-DU-L1G" secondAttribute="bottom" constant="25" id="Zi9-gb-gpu"/>
+                            <constraint firstItem="qhh-dq-zg6" firstAttribute="top" secondItem="GFE-DU-L1G" secondAttribute="bottom" constant="30" id="Zi9-gb-gpu"/>
                             <constraint firstItem="Qgt-Hc-32f" firstAttribute="width" secondItem="MvE-5z-LPs" secondAttribute="width" multiplier="0.821256" id="beH-0P-nGZ"/>
                             <constraint firstItem="2ai-PK-QXC" firstAttribute="centerX" secondItem="eqP-Vb-NDj" secondAttribute="centerX" id="fsU-fW-C0G"/>
                             <constraint firstItem="qhh-dq-zg6" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.0446429" id="kS5-3k-cFu"/>
@@ -835,6 +835,9 @@
         <namedColor name="GreenBtnColor">
             <color red="0.19200000166893005" green="0.44299998879432678" blue="0.28999999165534973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="GreenTapColor">
+            <color red="0.27500000596046448" green="0.54900002479553223" blue="0.3919999897480011" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="RedBrownBtnColor">
             <color red="0.69800001382827759" green="0.32499998807907104" blue="0.024000000208616257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -843,9 +846,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
