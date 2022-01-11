@@ -370,7 +370,7 @@ extension FirebaseDatabaseClass {
     }
     
     /// Sends a message with target conversation and messagee
-    static func sendMessage(to conversationId: String, name:String, newMessage:Message, completion: @escaping (Bool) -> Void){
+    static func sendMessage(to conversationId: String, otherUserEmail:String, name:String, newMessage:Message, completion: @escaping (Bool) -> Void){
         // add new message to messages
         // update sender latest message
         // update recipient latest message
@@ -441,6 +441,8 @@ extension FirebaseDatabaseClass {
                     completion(false)
                     return
                 }
+                
+                
             }
             
         }

@@ -23,8 +23,6 @@ struct Sender: SenderType {
 }
 
 class ChatViewController: MessagesViewController  {
-  
-    
     static var dataFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -35,7 +33,6 @@ class ChatViewController: MessagesViewController  {
     
     var otherUserEmail:String?
     var conversationId: String? // if converation created
-    
     var isNewConversation = false
     var messagesArray = [Message]()
     var selfSender: Sender? {
@@ -55,14 +52,14 @@ class ChatViewController: MessagesViewController  {
         //messagesCollectionView.messageCellDelegate = self
         messageInputBar.delegate = self
         
-        if let conversaionID = conversationId {
-            listernForMessages(conversationId: conversaionID, shouldScrollToBottom:true)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
+        if let conversaionID = conversationId {
+            listernForMessages(conversationId: conversaionID, shouldScrollToBottom:true)
+        }
     }
     
     func listernForMessages(conversationId: String, shouldScrollToBottom:Bool){
@@ -92,8 +89,9 @@ class ChatViewController: MessagesViewController  {
 }
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
+    
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        
+            
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty, let selfSender = self.selfSender,
              let messageId = createMsgID() else {
             return
@@ -114,18 +112,23 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                 if success {
                     print("Message sent")
                     self.isNewConversation = false
+                    let newConversaionId = "conversation_\(message.messageId)"
+                    self.conversationId = newConversaionId
+                    self.listernForMessages(conversationId: newConversaionId, shouldScrollToBottom: true)
+                    self.messageInputBar.inputTextView.text = nil
                 }else {
                     print("Faild to send")
                 }
             }
         }else {
             //append to exiting convo data
-            guard let conversationID = conversationId, let name = self.title  else {
+            guard let conversationID = conversationId, let otherUserEmail = otherUserEmail , let name = self.title  else {
                 return
             }
-            FirebaseDatabaseClass.sendMessage(to: conversationID, name:name , newMessage: message) { success in
+            FirebaseDatabaseClass.sendMessage(to: conversationID, otherUserEmail: otherUserEmail, name:name , newMessage: message) { success in
                 if success {
                     print("message sent")
+                    self.messageInputBar.inputTextView.text = nil
                 }else {
                     print("Faild to sent")
                 }
@@ -169,29 +172,3 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     
 }
 
-extension MessageKind {
-    var msgKindString: String {
-        switch self{
-        case .text(_):
-            return "text"
-        case .attributedText(_):
-            return "attributedText"
-        case .photo(_):
-            return "photo"
-        case .video(_):
-            return "video"
-        case .location(_):
-            return "location"
-        case .emoji(_):
-            return "emoji"
-        case .audio(_):
-            return "audio"
-        case .contact(_):
-            return "contact"
-        case .linkPreview(_):
-            return "linkPreview"
-        case .custom(_):
-            return "custom"
-        }
-    }
-}
