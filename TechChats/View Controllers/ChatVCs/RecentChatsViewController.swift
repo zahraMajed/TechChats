@@ -14,13 +14,13 @@ class RecentChatsViewController: UIViewController {
     @IBOutlet weak var recentChatsTableView: UITableView!
     
     var conversationsArray = [Conversation]()
-    
+   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         recentChatsTableView.dataSource = self
         recentChatsTableView.delegate = self
-        
-        fetchConversations()
+     
         startListeningForConversations()
     }
     
@@ -30,6 +30,10 @@ class RecentChatsViewController: UIViewController {
         }
         var currentUserEmailSafe = currentUserEmail.replacingOccurrences(of: ".", with: "-")
         currentUserEmailSafe =  currentUserEmailSafe.replacingOccurrences(of: "@", with: "-")
+        
+        print("starting conversation fetch...")
+        //there is ovserver
+        
         FirebaseDatabaseClass.getAllConversation(for: currentUserEmailSafe) { result in
             switch result {
             case .success(let conversations):
@@ -47,9 +51,7 @@ class RecentChatsViewController: UIViewController {
         }
     }
 
-    func fetchConversations(){
-        
-    }
+    
 }
 
 extension RecentChatsViewController:UITableViewDataSource, UITableViewDelegate{
@@ -61,7 +63,7 @@ extension RecentChatsViewController:UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "userChatCell") as! RecentChatTableViewCell
         cell.lblUserName.text = conversationsArray[indexPath.row].name
-        cell.lblUserName.text = conversationsArray[indexPath.row].latestMessage.text
+        cell.lblUserChat.text = conversationsArray[indexPath.row].latestMessage.text
         let path = "images/\(conversationsArray[indexPath.row].otherUserEmail)_profile_picture.png"
         FirebaseStorageClass.downloadURL(for: path) { result in
             switch result {
@@ -86,7 +88,6 @@ extension RecentChatsViewController:UITableViewDataSource, UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
               let model = conversationsArray[indexPath.row]
               openConversation(model)
-        //goToChatFromRecent
     }
     
     func openConversation(_ model: Conversation) {
