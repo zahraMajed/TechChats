@@ -23,13 +23,16 @@ class SignUpViewController: UIViewController {
         passwordTF.delegate = self
         passwordTF.isSecureTextEntry = true
         
-        //listen for keyboard event
+        keyboardEventListener()
+
+    }
+    
+    deinit {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
-    
-    deinit {
+    func keyboardEventListener(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -46,7 +49,6 @@ class SignUpViewController: UIViewController {
             
             FirebaseAuthClass.signUserUp(firstName: firstName, lastName: lastName, email: email, password: password) { isExist, isSignedUp, errorInfo, techUSerObj in
                 if isExist {
-                    //user exist
                     //show slert here that user is exist
                     print("user already exist")
                     return
@@ -74,29 +76,12 @@ class SignUpViewController: UIViewController {
                             print("in btn pressed")
                         }
                         self.present(editProfileNav, animated: true, completion: nil)
-                        
-                        //self.performSegue(withIdentifier: "goToeditProfileNav", sender: self.signupBtnPressed(_:))
-                        
                     }//end last else if
                 }
             }
         }
         hideKeyboard()
     }
-    
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToeditProfileNav" {
-            let destination = segue.destination as! UINavigationController
-            let editProfile = destination.topViewController as! UserEditProfileViewController
-            if let user = userObj {
-                print(" in prepare")
-                editProfile.techUserObj = user
-                print(editProfile.techUserObj!)
-            }
-            
-        }
-    }*/
 }
 
 extension SignUpViewController: UITextFieldDelegate {

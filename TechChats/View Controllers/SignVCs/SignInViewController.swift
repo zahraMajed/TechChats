@@ -19,13 +19,15 @@ class SignInViewController: UIViewController {
         passwordTF.delegate = self
         passwordTF.isSecureTextEntry = true
         
-        //listen for keyboard event
+        keyboardEventListener()
+    }
+    
+    deinit {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
-    
-    deinit {
+    func keyboardEventListener(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -50,7 +52,7 @@ class SignInViewController: UIViewController {
                 }else if !isSigedin {
                     if userEmail.isEmpty, userPasaword.isEmpty {
                         //show alert here
-                        print("alert user did not enter signin data")
+                        print("user did not enter signin data")
                     }
                     //show alert
                     print("wrong email or password")

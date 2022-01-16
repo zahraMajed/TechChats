@@ -79,6 +79,7 @@ final class FirebaseAuthClass {
               }
             }
         }
+        print("user name in getName Firebase Auth: ",userName)
         return userName
     }
 }
