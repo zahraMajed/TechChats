@@ -77,7 +77,7 @@ class ChatViewController: MessagesViewController  {
                             self.messagesCollectionView.reloadDataAndKeepOffset()
 
                             if shouldScrollToBottom {
-                                self.messagesCollectionView.scrollToBottom()
+                                self.messagesCollectionView.scrollToLastItem()
                             }
                         }
                        case .failure(let error):
@@ -159,7 +159,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             return sender
         }
         fatalError("self sender is nil - email should be cached")
-        return Sender(photoURL: "", senderId: "12", displayName: "")
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {

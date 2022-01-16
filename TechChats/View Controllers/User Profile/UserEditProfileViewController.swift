@@ -33,11 +33,8 @@ class UserEditProfileViewController: UIViewController {
         print("inside edit profile")
         
         putUserData()
+        keyboardEventListener()
         
-        //listen for keyboard event
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     deinit {
@@ -46,34 +43,30 @@ class UserEditProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
-    
+    func keyboardEventListener(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
     
     func putUserData(){
-        
         guard  let techUser = techUserObj else {
             print("tech user is still nil")
             return
         }
-        
         userNameTF.text = "\(techUser.firstName) \(techUser.lastName)"
-        
         guard let jobTitle = techUser.jobTitle, let userBio = techUser.bio else {
             print("put data function: only user name is exist ")
             return
         }
-        
         jobTitleTF.text = jobTitle
         userBioTV.text = userBio
-        
         if let linkedinLink = techUser.linkedinLink {
             linkedinURLTF.text = linkedinLink
         }
-        
         if let gitHunLink = techUser.gitHubLinked {
             githubURLTF.text = gitHunLink
         }
-        
-        // set photo
         getUserProfilePicture(with: techUser.profilePictureFileName)
     }
     
@@ -103,9 +96,23 @@ class UserEditProfileViewController: UIViewController {
       }.resume()
     }
     
+    func storeProfilePhotoInFBStoarge(with fileName: String){
+        guard let userImage1 = userImg.image, let data = userImage1.pngData() else {
+            return
+        }
+        FirebaseStorageClass.uploadProfilePicture(with: data, fileName: fileName) { result in
+            switch result {
+            case .success(let downloadUrl):
+                print("Download URL:",downloadUrl)
+            case .failure(let error):
+                print("Stoarge error:\(error)")
+            }
+        }
+    }
+    
     func getTechUserObj()-> TechUser? {
         if let techUser = techUserObj {
-            print("sucessfully get TechUser (inside getTechUSer() )")
+            print("sucessfully get TechUser (inside getTechUSer() edit user)")
             return techUser
         }
         return techUserObj
@@ -116,90 +123,102 @@ class UserEditProfileViewController: UIViewController {
     }
     
     @IBAction func saveBtnPressed(_ sender: Any) {
-        
-        guard let userName = userNameTF.text, let jobTtile = jobTitleTF.text , let userBio = userBioTV.text,
-              let linkedInLink = linkedinURLTF.text, let gitHubLink = githubURLTF.text else {
+        guard let userName = userNameTF.text, let jobTtile = jobTitleTF.text , let userBio = userBioTV.text, let linkedInLink = linkedinURLTF.text, let gitHubLink = githubURLTF.text else {
             return
         }
-
-            let techUser = getTechUserObj()
-            guard var userObj = techUser else {
-                print("Faild get TechUser (inside saveBnt() ")
-                return
-            }
-            
-            if userName.isEmpty && jobTtile.isEmpty && userBio.isEmpty {
-                //show alert to complete the reqierd
-                print("Please compleate missing fialds")
-            } else {
-    
-                
-                var components = userName.components(separatedBy: " ")
-                if components.count > 0 {
-                let firstName = components.removeFirst()
-                let lastName = components.joined(separator: " ")
-                     
-                userObj.firstName = firstName
-                userObj.lastName = lastName
-                userObj.jobTitle = jobTtile
-                userObj.bio = userBio
-                userObj.linkedinLink = linkedInLink
-                userObj.gitHubLinked =  gitHubLink
-                
-                    FirebaseDatabaseClass.updateTechUser(with: userObj) { isUpdated in
-                        if isUpdated {
-                            //show alert
-                            print("updated inside completion ")
-                        }else {
-                            //show alert
-                            print("Faild updated inside completion ")
-                        }
+        let techUser = getTechUserObj()
+        guard var userObj = techUser else {
+            print("Faild get TechUser inside saveBnt() user edit ")
+            return
+        }
+        if userName.isEmpty && jobTtile.isEmpty && userBio.isEmpty {
+            //show alert to complete the reqierd
+            print("Please compleate missing fialds")
+        } else {
+            var components = userName.components(separatedBy: " ")
+            if components.count > 0 {
+            let firstName = components.removeFirst()
+            let lastName = components.joined(separator: " ")
+            //update obj value
+            userObj.firstName = firstName
+            userObj.lastName = lastName
+            userObj.jobTitle = jobTtile
+            userObj.bio = userBio
+            userObj.linkedinLink = linkedInLink
+            userObj.gitHubLinked =  gitHubLink
+                FirebaseDatabaseClass.updateTechUser(with: userObj) { isUpdated in
+                    if isUpdated {
+                        //show alert
+                        print("Data successfully updated - user edit")
+                        //move to profile
+                        //store profile photo
+                    }else {
+                        //show alert - try again
+                        print("Faild update data - user edit")
                     }
-                
+                }
                 storeProfilePhotoInFBStoarge(with: userObj.profilePictureFileName)
-          }
-            // alert that data saved successfull
-                
+            }
             let mainTabBarVC = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
             mainTabBarVC.techUserObj = userObj
             mainTabBarVC.selectedIndex = 1
-            self.present(mainTabBarVC, animated: true, completion: nil)
-         
-            }
-        
+            self.navigationController?.pushViewController(mainTabBarVC, animated: true)
+        }
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
-        
-        //then go to profile page
-        //first check if jobTitle and bio is stored in fireBase you have to user obser
-        // if thay stored then show conformation then got to profile page without updating anything
-        // if nothing stored in FB then show alert and forece user to enter jobTitle and bio
-    }
-    
-    func storeProfilePhotoInFBStoarge(with fileName: String){
-        
-        guard let userImage1 = userImg.image, let data = userImage1.pngData() else {
+        guard let userObj = getTechUserObj() else {
+            print("Faild get TechUser inside cancelBtn() user edit ")
             return
         }
-        
-        FirebaseStorageClass.uploadProfilePicture(with: data, fileName: fileName) { result in
-            switch result {
-            case .success(let downloadUrl):
-                UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
-                print(downloadUrl)
-            case .failure(let error):
-                print("Stoarge error:\(error)")
+        FirebaseDatabaseClass.getTechUserData(with: userObj.safeEmail) { isFetched, userDic in
+            if isFetched {
+                guard userDic != nil, let userDic = userDic else {
+                    print("user dic is nil - inside user edit (cancel)")
+                    return
+                }
+                guard let _ = userDic["first_name"] as? String,
+                      let _ = userDic["last_name"] as? String,
+                      let _ = userDic["job_title"] as? String,
+                      let _ = userDic["user_bio"] as? String
+                else {
+                    //show alert that forece user to enter jobTitle and bio
+                    return
+                }
+                //then go to profile page
+                let mainTabBarVC = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
+                mainTabBarVC.techUserObj = userObj
+                mainTabBarVC.selectedIndex = 1
+                self.navigationController?.pushViewController(mainTabBarVC, animated: true)
             }
         }
     }
-    
-    
+}
+
+extension UserEditProfileViewController: UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+    func openImagePicker() {
+            print("inside getPhoto()")
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.allowsEditing = false
+            picker.delegate = self
+            present(picker, animated: true, completion: nil)
+        }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+       dismiss(animated: true, completion: nil)
+        if let img = info[.originalImage] as? UIImage {
+            userImg.image = img
+            print("img assigned")
+        }else {
+            print("img not found")
+        }
     }
-    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+}
 
-
-extension UserEditProfileViewController: UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+extension UserEditProfileViewController: UITextFieldDelegate, UITextViewDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         hideKeyboard()
@@ -240,29 +259,6 @@ extension UserEditProfileViewController: UITextFieldDelegate, UITextViewDelegate
             textView.text = "Bio"
             textView.textColor = UIColor.lightGray
         }
-    }
-    
-    func openImagePicker() {
-            print("inside getPhoto()")
-            let picker = UIImagePickerController()
-            picker.sourceType = .photoLibrary
-            picker.allowsEditing = false
-            picker.delegate = self
-            present(picker, animated: true, completion: nil)
-        }
-        
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-       dismiss(animated: true, completion: nil)
-        if let img = info[.originalImage] as? UIImage {
-            userImg.image = img
-            print("img assigned")
-        }else {
-            print("img not found")
-        }
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
 }
 

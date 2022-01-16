@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B92DF4E327941B4D00EC74EC /* FriendProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92DF4E227941B4D00EC74EC /* FriendProfileViewController.swift */; };
 		C3A6AA66278D81AD0087A049 /* TechChatDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A6AA65278D81AD0087A049 /* TechChatDelegates.swift */; };
 		C3C2145A2784705C0060FD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C214592784705C0060FD05 /* AppDelegate.swift */; };
 		C3C2145C2784705C0060FD05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C2145B2784705C0060FD05 /* SceneDelegate.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B92DF4E227941B4D00EC74EC /* FriendProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileViewController.swift; sourceTree = "<group>"; };
 		C3A6AA65278D81AD0087A049 /* TechChatDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechChatDelegates.swift; sourceTree = "<group>"; };
 		C3C214562784705C0060FD05 /* TechChats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechChats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C214592784705C0060FD05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				C3C21498278476300060FD05 /* UserProfileViewController.swift */,
 				C3C2149A2784763F0060FD05 /* UserEditProfileViewController.swift */,
+				B92DF4E227941B4D00EC74EC /* FriendProfileViewController.swift */,
 			);
 			path = "User Profile";
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				C3C214A0278476C30060FD05 /* RecentChatsViewController.swift in Sources */,
 				C3D027D7278B6AFD00748D8B /* ConversationStruct.swift in Sources */,
 				C3C2145C2784705C0060FD05 /* SceneDelegate.swift in Sources */,
+				B92DF4E327941B4D00EC74EC /* FriendProfileViewController.swift in Sources */,
 				C3C214C3278482CA0060FD05 /* FireBaseDatabase.swift in Sources */,
 				C3D027CE27881F9100748D8B /* mainTabBarC.swift in Sources */,
 				C3D027C92786FABC00748D8B /* RecentChatTableViewCell.swift in Sources */,

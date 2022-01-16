@@ -39,7 +39,7 @@ final class FirebaseDatabaseClass {
         case faildToFetch
     }
     
-    static func getTechUserData(with safeEmail:String, completion: @escaping (_ isFetched: Bool, _ userValeDic:NSDictionary?) -> Void){
+    static func getTechUserData(with safeEmail:String, completion: @escaping (_ isFetched: Bool, _ userDic:NSDictionary?) -> Void){
         databaseRef.child(safeEmail).observeSingleEvent(of: .value) { dataSnapshot in
             guard let value = dataSnapshot.value as? NSDictionary else {
                 print("Fail to fetch data")
@@ -354,7 +354,7 @@ extension FirebaseDatabaseClass {
                 }
                 
                 let sender = Sender(photoURL: "", senderId: senderEmail, displayName: name)
-                return Message(sender: sender, messageId: messageID, sentDate: date, kind: .text(dateString))
+                return Message(sender: sender, messageId: messageID, sentDate: date, kind: .text(content))
             }
             completion(.success(messages))
         }
