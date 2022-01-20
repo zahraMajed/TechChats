@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftEntryKit
 
 class SignInViewController: UIViewController {
 
@@ -50,19 +51,22 @@ class SignInViewController: UIViewController {
                     self.present(mainTabBarToChat, animated: true, completion: nil)
             
                 }else if !isSigedin {
-                    if userEmail.isEmpty, userPasaword.isEmpty {
-                        //show alert here
-                        print("user did not enter signin data")
+                    if userEmail.isEmpty  {
+                        //show label here
+                        print("Please enter your email")
+                        return
+                    }
+                    if userPasaword.isEmpty {
+                        //show label here
+                        print("Please enter your password")
+                        return
                     }
                     //show alert
-                    print("wrong email or password")
+                    SwiftEntryClass.showTryAgainAlertWith(title: "Signin Faild", textDescription: "Looks like your email and/or password do not match")
+                    print("Signin Faild, Your email and/or password do not match. try again")
                 }
             }
         }}
-    
-    @IBAction func signinToSingupBtn(_ sender: Any) {
-    
-    }
 }
 
 extension SignInViewController: UITextFieldDelegate {
@@ -89,4 +93,3 @@ extension SignInViewController: UITextFieldDelegate {
         }
     }
 }
-

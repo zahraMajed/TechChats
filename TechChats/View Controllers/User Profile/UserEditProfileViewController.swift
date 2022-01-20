@@ -162,7 +162,7 @@ class UserEditProfileViewController: UIViewController {
             let mainTabBarVC = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
             mainTabBarVC.techUserObj = userObj
             mainTabBarVC.selectedIndex = 1
-            self.navigationController?.pushViewController(mainTabBarVC, animated: true)
+            self.present(mainTabBarVC, animated: true, completion: nil)
         }
     }
     
@@ -189,10 +189,11 @@ class UserEditProfileViewController: UIViewController {
                 let mainTabBarVC = self.storyboard?.instantiateViewController(identifier: "mainTabBar") as! mainTabBarC
                 mainTabBarVC.techUserObj = userObj
                 mainTabBarVC.selectedIndex = 1
-                self.navigationController?.pushViewController(mainTabBarVC, animated: true)
+                self.present(mainTabBarVC, animated: true, completion: nil)
             }
         }
     }
+
 }
 
 extension UserEditProfileViewController: UIImagePickerControllerDelegate , UINavigationControllerDelegate {

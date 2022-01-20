@@ -16,7 +16,6 @@ extension Dictionary {
     }
 }
 
-
 extension MessageKind {
     var msgKindString: String {
         switch self{

@@ -56,7 +56,7 @@
                                 <rect key="frame" x="37" y="565" width="133" height="32"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="Forgot password?">
-                                    <color key="titleColor" name="BrownBtnColor"/>
+                                    <color key="titleColor" red="0.61176470588235299" green="0.48627450980392156" blue="0.082352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0FC-2K-Odk">
@@ -509,7 +509,9 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3ms-xb-JRg">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.27450980392156865" green="0.5490196078431373" blue="0.39215686274509803" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="C4v-2u-WWh" kind="relationship" relationship="viewControllers" id="s7D-Zz-bb5"/>
@@ -743,7 +745,7 @@
         <scene sceneID="p0l-ul-kC8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="C4v-2u-WWh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chat" id="HiN-zk-k1r"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="code-review-24" id="HiN-zk-k1r"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3VE-5m-f2X">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -762,7 +764,7 @@
         <scene sceneID="jiU-01-c9K">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0I2-EH-gXX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2SJ-2R-IRz"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="person_search" id="2SJ-2R-IRz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="q3T-l8-DCb">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -781,7 +783,7 @@
         <scene sceneID="PNs-6w-DkQ">
             <objects>
                 <navigationController storyboardIdentifier="profileNavCont" automaticallyAdjustsScrollViewInsets="NO" id="MAC-bU-JAK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="qJR-iL-hcW"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" id="qJR-iL-hcW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="qbG-bo-xxT">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -920,6 +922,7 @@
         <segue reference="BJ7-mu-kUs"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="code-review-24" width="34" height="34"/>
         <image name="defaultPhoto" width="414" height="287"/>
         <image name="edit" width="34" height="34"/>
         <image name="emailIcon" width="34" height="34"/>
@@ -929,6 +932,8 @@
         <image name="logos_facebook" width="44" height="45"/>
         <image name="logos_linkedin-icon" width="44" height="45"/>
         <image name="mainPhoto" width="414" height="279"/>
+        <image name="person" width="34" height="34"/>
+        <image name="person_search" width="34" height="34"/>
         <namedColor name="BrownBtnColor">
             <color red="0.6119999885559082" green="0.48600000143051147" blue="0.082000002264976501" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -936,7 +941,7 @@
             <color red="0.19200000166893005" green="0.44299998879432678" blue="0.28999999165534973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GreenTapColor">
-            <color red="0.27500000596046448" green="0.54900002479553223" blue="0.3919999897480011" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27450980392156865" green="0.5490196078431373" blue="0.39215686274509803" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="RedBrownBtnColor">
             <color red="0.69800001382827759" green="0.32499998807907104" blue="0.024000000208616257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

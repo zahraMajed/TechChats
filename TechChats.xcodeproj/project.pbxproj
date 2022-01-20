@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B91F421B279A031D002E5199 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91F421A279A031D002E5199 /* UIColor+Utils.swift */; };
+		B91F421D279A05E2002E5199 /* UIScreen+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91F421C279A05E2002E5199 /* UIScreen+Utils.swift */; };
+		B91F421F279A063C002E5199 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91F421E279A063C002E5199 /* CGRect.swift */; };
+		B91F4221279A0C5E002E5199 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91F4220279A0C5E002E5199 /* Fonts.swift */; };
+		B91F4225279A1067002E5199 /* SwiftEntryClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91F4224279A1067002E5199 /* SwiftEntryClass.swift */; };
 		B92DF4E327941B4D00EC74EC /* FriendProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92DF4E227941B4D00EC74EC /* FriendProfileViewController.swift */; };
 		C3A6AA66278D81AD0087A049 /* TechChatDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A6AA65278D81AD0087A049 /* TechChatDelegates.swift */; };
 		C3C2145A2784705C0060FD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C214592784705C0060FD05 /* AppDelegate.swift */; };
@@ -42,6 +47,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B91F421A279A031D002E5199 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
+		B91F421C279A05E2002E5199 /* UIScreen+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Utils.swift"; sourceTree = "<group>"; };
+		B91F421E279A063C002E5199 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
+		B91F4220279A0C5E002E5199 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		B91F4224279A1067002E5199 /* SwiftEntryClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftEntryClass.swift; sourceTree = "<group>"; };
 		B92DF4E227941B4D00EC74EC /* FriendProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileViewController.swift; sourceTree = "<group>"; };
 		C3A6AA65278D81AD0087A049 /* TechChatDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechChatDelegates.swift; sourceTree = "<group>"; };
 		C3C214562784705C0060FD05 /* TechChats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechChats.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +99,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B91F4219279A02F5002E5199 /* SwiftEntry */ = {
+			isa = PBXGroup;
+			children = (
+				B91F4223279A0F35002E5199 /* model */,
+				B91F4222279A0F1A002E5199 /* extensions */,
+			);
+			path = SwiftEntry;
+			sourceTree = "<group>";
+		};
+		B91F4222279A0F1A002E5199 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B91F421A279A031D002E5199 /* UIColor+Utils.swift */,
+				B91F421C279A05E2002E5199 /* UIScreen+Utils.swift */,
+				B91F421E279A063C002E5199 /* CGRect.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		B91F4223279A0F35002E5199 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				B91F4224279A1067002E5199 /* SwiftEntryClass.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		C3C2144D2784705C0060FD05 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +147,7 @@
 			children = (
 				C3C214AB278479680060FD05 /* GoogleService-Info.plist */,
 				C3C214672784705F0060FD05 /* Info.plist */,
+				B91F4219279A02F5002E5199 /* SwiftEntry */,
 				C3D027C42785F5D500748D8B /* extensions */,
 				C3C214BD278482730060FD05 /* Storag */,
 				C3C2148F2784756C0060FD05 /* Views */,
@@ -148,6 +186,7 @@
 				C3C2145F2784705C0060FD05 /* Main.storyboard */,
 				C3C214622784705F0060FD05 /* Assets.xcassets */,
 				C3C214642784705F0060FD05 /* LaunchScreen.storyboard */,
+				B91F4220279A0C5E002E5199 /* Fonts.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -328,20 +367,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3C214C1278482B90060FD05 /* FireBaseAuth.swift in Sources */,
+				B91F421D279A05E2002E5199 /* UIScreen+Utils.swift in Sources */,
+				B91F4221279A0C5E002E5199 /* Fonts.swift in Sources */,
 				C3A6AA66278D81AD0087A049 /* TechChatDelegates.swift in Sources */,
 				C3D027C327859E8800748D8B /* TechUserStruct.swift in Sources */,
 				C3C2149B2784763F0060FD05 /* UserEditProfileViewController.swift in Sources */,
 				C3C214A5278476F80060FD05 /* TechUserViewController.swift in Sources */,
 				C3C21494278475E80060FD05 /* SignInViewController.swift in Sources */,
+				B91F421F279A063C002E5199 /* CGRect.swift in Sources */,
 				C3D027C62785F5E700748D8B /* extensions.swift in Sources */,
 				C3C21499278476300060FD05 /* UserProfileViewController.swift in Sources */,
 				C3C2145A2784705C0060FD05 /* AppDelegate.swift in Sources */,
+				B91F4225279A1067002E5199 /* SwiftEntryClass.swift in Sources */,
 				C3D027D2278A117D00748D8B /* FriendsTableViewCell.swift in Sources */,
 				C3C21492278475D20060FD05 /* SplachViewController.swift in Sources */,
 				C3C214A0278476C30060FD05 /* RecentChatsViewController.swift in Sources */,
 				C3D027D7278B6AFD00748D8B /* ConversationStruct.swift in Sources */,
 				C3C2145C2784705C0060FD05 /* SceneDelegate.swift in Sources */,
 				B92DF4E327941B4D00EC74EC /* FriendProfileViewController.swift in Sources */,
+				B91F421B279A031D002E5199 /* UIColor+Utils.swift in Sources */,
 				C3C214C3278482CA0060FD05 /* FireBaseDatabase.swift in Sources */,
 				C3D027CE27881F9100748D8B /* mainTabBarC.swift in Sources */,
 				C3D027C92786FABC00748D8B /* RecentChatTableViewCell.swift in Sources */,
