@@ -40,26 +40,54 @@ class SignUpViewController: UIViewController {
 
     @IBAction func signupBtnPressed(_ sender: UIButton) {
         if let firstName = firstNameTF.text, let lastName = lastNameTF.text, let email = emailTF.text, let password = passwordTF.text {
-            
-            if firstName.isEmpty && lastName.isEmpty && email.isEmpty && password.isEmpty {
-                //alert here
-                print("Please fil all entries")
-                return
+            var emptyFieldArray = [String]()
+            var missingFiled = ""
+            if firstName.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty {
+                if firstName.isEmpty {
+                    emptyFieldArray.append("first name")
+                }
+                if lastName.isEmpty {
+                    emptyFieldArray.append("last name")
+                }
+                if email.isEmpty{
+                    emptyFieldArray.append("email")
+                }
+                if password.isEmpty{
+                    emptyFieldArray.append("password")
+                }
+                for i in emptyFieldArray {
+                    if i != emptyFieldArray.last! {
+                        missingFiled += "\(i),"
+                    } else if i == emptyFieldArray.last! {
+                        if emptyFieldArray.count > 1 {
+                            missingFiled += "and \(i)"
+                        } else {
+                            missingFiled += "\(i)"
+                        }
+                    }
+                }
+                if emptyFieldArray.count == 4 {
+                    SwiftEntryClass.showTryAgainAlertWith(title: "Signup Faild", textDescription: "Please fill all field")
+                    return
+                }else if !emptyFieldArray.isEmpty {
+                    SwiftEntryClass.showTryAgainAlertWith(title: "Signup Faild", textDescription: "Please enter your \(missingFiled)")
+                    return
+                }
             }
             
             FirebaseAuthClass.signUserUp(firstName: firstName, lastName: lastName, email: email, password: password) { isExist, isSignedUp, errorInfo, techUSerObj in
                 if isExist {
-                    //show slert here that user is exist
+                    //show slert here or label that user is exist
                     print("user already exist")
                     return
                 } else if !isExist {
                     if !isSignedUp {
-                        //show alert here with error info
+                        SwiftEntryClass.showTryAgainAlertWith(title: "Signup Faild", textDescription: "\(errorInfo!)")
                         print("Faild to create a user - \(errorInfo!)")
                         return
                     }else
                     if isSignedUp {
-                        //show alert here
+                        //show success alert here
                         print("User has signed up successfully")
                         
                         if let techUserObj = techUSerObj {

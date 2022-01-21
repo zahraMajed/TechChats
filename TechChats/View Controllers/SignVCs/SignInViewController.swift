@@ -53,11 +53,13 @@ class SignInViewController: UIViewController {
                 }else if !isSigedin {
                     if userEmail.isEmpty  {
                         //show label here
+                        SwiftEntryClass.showTryAgainAlertWith(title: "Signin Faild", textDescription: "Looks like you forgot to enter your email")
                         print("Please enter your email")
                         return
                     }
                     if userPasaword.isEmpty {
                         //show label here
+                        SwiftEntryClass.showTryAgainAlertWith(title: "Signin Faild", textDescription: "Looks like you forgot to enter your password")
                         print("Please enter your password")
                         return
                     }

@@ -86,8 +86,7 @@
                                             <color key="titleColor" name="BrownBtnColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="signinToSingupBtn:" destination="AG5-Px-XNy" eventType="touchUpInside" id="2KL-MC-kWg"/>
-                                            <segue destination="PTF-Qb-MUZ" kind="show" id="NQ5-Na-MoZ"/>
+                                            <segue destination="PTF-Qb-MUZ" kind="show" id="Bi3-rV-C9s"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -465,7 +464,6 @@
                             <constraint firstItem="qhh-dq-zg6" firstAttribute="width" secondItem="MvE-5z-LPs" secondAttribute="width" multiplier="0.821256" id="C65-kN-mmh"/>
                             <constraint firstItem="Qgt-Hc-32f" firstAttribute="centerX" secondItem="eqP-Vb-NDj" secondAttribute="centerX" id="ImW-9E-oBj"/>
                             <constraint firstItem="svY-uL-RzQ" firstAttribute="top" secondItem="niY-Xk-dKE" secondAttribute="bottom" constant="25" id="JEv-tZ-UTH"/>
-                            <constraint firstItem="2ai-PK-QXC" firstAttribute="top" secondItem="X1r-Za-AWk" secondAttribute="bottom" constant="25" id="JY7-cn-mWe"/>
                             <constraint firstItem="eqP-Vb-NDj" firstAttribute="trailing" secondItem="svY-uL-RzQ" secondAttribute="trailing" constant="37" id="Kc5-Wx-Fxr"/>
                             <constraint firstItem="niY-Xk-dKE" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.311384" id="L0C-6y-MCt"/>
                             <constraint firstItem="X1r-Za-AWk" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.0669643" id="OFa-Ny-lV6"/>
@@ -473,19 +471,20 @@
                             <constraint firstItem="GFE-DU-L1G" firstAttribute="centerX" secondItem="eqP-Vb-NDj" secondAttribute="centerX" id="SD5-J0-l7Z"/>
                             <constraint firstItem="GFE-DU-L1G" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.0669643" id="U9l-Df-3g7"/>
                             <constraint firstItem="svY-uL-RzQ" firstAttribute="leading" secondItem="eqP-Vb-NDj" secondAttribute="leading" constant="37" id="WF6-hm-EOF"/>
-                            <constraint firstItem="GFE-DU-L1G" firstAttribute="top" secondItem="2ai-PK-QXC" secondAttribute="bottom" constant="25" id="XlV-pm-g00"/>
+                            <constraint firstItem="GFE-DU-L1G" firstAttribute="top" secondItem="2ai-PK-QXC" secondAttribute="bottom" constant="25" id="YDc-XO-yNL"/>
                             <constraint firstItem="qhh-dq-zg6" firstAttribute="top" secondItem="GFE-DU-L1G" secondAttribute="bottom" constant="30" id="Zi9-gb-gpu"/>
                             <constraint firstItem="Qgt-Hc-32f" firstAttribute="width" secondItem="MvE-5z-LPs" secondAttribute="width" multiplier="0.821256" id="beH-0P-nGZ"/>
                             <constraint firstItem="2ai-PK-QXC" firstAttribute="centerX" secondItem="eqP-Vb-NDj" secondAttribute="centerX" id="fsU-fW-C0G"/>
                             <constraint firstItem="qhh-dq-zg6" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.0446429" id="kS5-3k-cFu"/>
                             <constraint firstItem="X1r-Za-AWk" firstAttribute="width" secondItem="MvE-5z-LPs" secondAttribute="width" multiplier="0.821256" id="kXj-UJ-Zj9"/>
                             <constraint firstItem="X1r-Za-AWk" firstAttribute="centerX" secondItem="eqP-Vb-NDj" secondAttribute="centerX" id="m0O-xB-1rs"/>
+                            <constraint firstItem="X1r-Za-AWk" firstAttribute="top" secondItem="Qgt-Hc-32f" secondAttribute="bottom" constant="25" id="qSP-nB-aWa"/>
                             <constraint firstItem="Qgt-Hc-32f" firstAttribute="height" secondItem="MvE-5z-LPs" secondAttribute="height" multiplier="0.0669643" id="rb0-zj-izq"/>
                             <constraint firstItem="GFE-DU-L1G" firstAttribute="width" secondItem="MvE-5z-LPs" secondAttribute="width" multiplier="0.821256" id="tCX-iw-mcZ"/>
                             <constraint firstItem="niY-Xk-dKE" firstAttribute="trailing" secondItem="eqP-Vb-NDj" secondAttribute="trailing" id="tI0-n0-9n0"/>
-                            <constraint firstItem="X1r-Za-AWk" firstAttribute="top" secondItem="Qgt-Hc-32f" secondAttribute="bottom" constant="25" id="toZ-ic-Ttf"/>
                             <constraint firstItem="niY-Xk-dKE" firstAttribute="leading" secondItem="eqP-Vb-NDj" secondAttribute="leading" id="uXm-9N-9rI"/>
                             <constraint firstItem="gdC-zw-DGd" firstAttribute="centerX" secondItem="eqP-Vb-NDj" secondAttribute="centerX" id="yMH-XH-8V6"/>
+                            <constraint firstItem="2ai-PK-QXC" firstAttribute="top" secondItem="X1r-Za-AWk" secondAttribute="bottom" constant="25" id="zrT-oI-OWS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CdA-5z-w4u"/>
@@ -498,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epD-ro-ozG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1248" y="127"/>
+            <point key="canvasLocation" x="1247.8260869565217" y="126.5625"/>
         </scene>
         <!--Main Tab BarC-->
         <scene sceneID="ltp-hP-NdJ">
@@ -918,7 +917,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="NQ5-Na-MoZ"/>
+        <segue reference="Bi3-rV-C9s"/>
         <segue reference="BJ7-mu-kUs"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -941,7 +940,7 @@
             <color red="0.19200000166893005" green="0.44299998879432678" blue="0.28999999165534973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GreenTapColor">
-            <color red="0.27450980392156865" green="0.5490196078431373" blue="0.39215686274509803" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.27500000596046448" green="0.54900002479553223" blue="0.3919999897480011" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="RedBrownBtnColor">
             <color red="0.69800001382827759" green="0.32499998807907104" blue="0.024000000208616257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
