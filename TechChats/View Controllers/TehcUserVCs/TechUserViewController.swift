@@ -99,6 +99,7 @@ extension TechUserViewController:UITableViewDataSource, UITableViewDelegate{
         //start conversation
         tableView.deselectRow(at: indexPath, animated: true)
         let targetUser = allUsersarray[indexPath.row]
+        //here should be completion (new conversation)
         openConversation(targetUser)
         print(targetUser)
         //performSegue(withIdentifier: "goToChat", sender: targetUser)

@@ -35,6 +35,19 @@ class UserEditProfileViewController: UIViewController {
         putUserData()
         keyboardEventListener()
         
+        let linkedInImg = UIImage(named: "linkedinIcon")!
+        addLeftImgTo(texeField: linkedinURLTF, andImg: linkedInImg)
+        let githubImg = UIImage(named: "githubIcon")!
+        addLeftImgTo(texeField: githubURLTF, andImg: githubImg)
+        
+        
+    }
+    
+    func addLeftImgTo(texeField: UITextField, andImg img : UIImage){
+        let leftImgView = UIImageView(frame: CGRect(x: 1.0, y: 1.0, width: img.size.width - 1.0, height: img.size.height - 1.0 ))
+        leftImgView.image = img
+        texeField.leftView = leftImgView
+        texeField.leftViewMode = .always
     }
     
     deinit {

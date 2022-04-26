@@ -131,4 +131,65 @@ extension SwiftEntryClass {
         let contentView = EKAlertMessageView(with: alertMessage)
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
+    static func showOKAlertWith(title:String, textDescription:String){
+        let attributes = popUpAttributes()
+        let title = EKProperty.LabelContent(
+            text: title,
+            style: .init(
+                font: MainFont.medium.with(size: 15),
+                color: .black,
+                alignment: .center,
+                displayMode: displayMode
+            )
+        )
+      
+        let description = EKProperty.LabelContent(
+            text: textDescription,
+            style: .init(
+                font: MainFont.light.with(size: 13),
+                color: .black,
+                alignment: .center,
+                displayMode: displayMode
+            )
+        )
+       
+        let simpleMessage = EKSimpleMessage(
+            image: nil,
+            title: title,
+            description: description
+        )
+        
+        let buttonFont = MainFont.medium.with(size: 16)
+        
+        let closeButtonLabelStyle = EKProperty.LabelStyle(
+            font: buttonFont,
+            color: Color.Teal.a600,
+            displayMode: displayMode
+        )
+        let closeButtonLabel = EKProperty.LabelContent(
+            text: "OK",
+            style: closeButtonLabelStyle
+        )
+        let closeButton = EKProperty.ButtonContent(
+            label: closeButtonLabel,
+            backgroundColor: .clear,
+            highlightedBackgroundColor: Color.Teal.a600.with(alpha: 0.05),
+            displayMode: displayMode) {
+                SwiftEntryKit.dismiss()
+        }
+     
+        // Generate the content
+        let buttonsBarContent = EKProperty.ButtonBarContent(
+            with: closeButton,
+            separatorColor: Color.Gray.light,
+            displayMode: displayMode,
+            expandAnimatedly: true
+        )
+        let alertMessage = EKAlertMessage(
+            simpleMessage: simpleMessage,
+            buttonBarContent: buttonsBarContent
+        )
+        let contentView = EKAlertMessageView(with: alertMessage)
+        SwiftEntryKit.display(entry: contentView, using: attributes)
+    }
 }

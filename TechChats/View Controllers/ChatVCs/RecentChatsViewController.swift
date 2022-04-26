@@ -91,13 +91,36 @@ extension RecentChatsViewController:UITableViewDataSource, UITableViewDelegate{
     }
     
     func openConversation(_ model: Conversation) {
-        let vc = ChatViewController()
+        let vc = ChatViewController() /////////////////here
         vc.title = model.name
         vc.otherUserEmail = model.otherUserEmail
         vc.conversationId = model.id
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    /*
+     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+           return .delete
+       }
+
+       func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+           if editingStyle == .delete {
+               // begin delete
+               let conversationId = conversations[indexPath.row].id
+               tableView.beginUpdates()
+               self.conversations.remove(at: indexPath.row)
+               tableView.deleteRows(at: [indexPath], with: .left)
+
+               DatabaseManager.shared.deleteConversation(conversationId: conversationId, completion: { success in
+                   if !success {
+                       // add model and row back and show error alert
+                   }
+               })
+
+               tableView.endUpdates()
+           }
+     */
     
 }
 

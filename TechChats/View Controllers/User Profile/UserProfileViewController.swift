@@ -109,14 +109,28 @@ class UserProfileViewController: UIViewController {
     
     @IBAction func emailBtnPressed(_ sender: Any) {
         //alert with email
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else  {
+            return
+        }
+        SwiftEntryClass.showOKAlertWith(title: "Email", textDescription: currentUserEmail)
     }
     
     @IBAction func linkedinBtnPressed(_ sender: Any) {
         //alert with linkedin
+        guard let linkedinLink = linkedinLink, linkedinLink != "" || !linkedinLink.isEmpty else {
+            SwiftEntryClass.showOKAlertWith(title: "Linkedin", textDescription: "No linkedin link")
+            return
+        }
+        SwiftEntryClass.showOKAlertWith(title: "Linkedin", textDescription: linkedinLink)
     }
     
     @IBAction func githubBtnPressed(_ sender: Any) {
         //alert with githun link
+        guard let gitHunLink = gitHunLink, gitHunLink != "" || !gitHunLink.isEmpty else {
+            SwiftEntryClass.showOKAlertWith(title: "Github", textDescription: "No Github link")
+            return
+        }
+        SwiftEntryClass.showOKAlertWith(title: "Github", textDescription: gitHunLink)
     }
     
 }
